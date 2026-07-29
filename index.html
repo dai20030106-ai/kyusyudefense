@@ -3,34 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>九州の状況（準備中）</title>
+<title>九州の状況</title>
 <style>
-  body { font-family: sans-serif; max-width: 640px; margin: 0 auto; padding: 16px; line-height: 1.7; color: #222; }
-  h1 { font-size: 20px; }
-  .box { border: 1px solid #ccc; border-radius: 8px; padding: 12px 16px; margin: 12px 0; }
-  .muted { color: #666; font-size: 14px; }
-  a { color: #0b5cad; }
-  footer { margin-top: 24px; font-size: 12px; color: #666; border-top: 1px solid #ddd; padding-top: 12px; }
+ body{font-family:sans-serif;margin:0 auto;max-width:760px;padding:12px;color:#222;line-height:1.6}
+ h1{font-size:19px;margin:4px 0}
+ .upd{color:#666;font-size:12px}
+ .wrap{display:grid;grid-template-columns:1fr;gap:12px}
+ .wrap.two{grid-template-columns:minmax(0,320px) 1fr}
+ @media(max-width:640px){.wrap.two{grid-template-columns:1fr}}
+ .card{background:#f6f6f4;border-radius:10px;padding:10px}
+ .panel{background:#fff;border:1px solid #ddd;border-radius:10px;padding:12px;display:none}
+ .crumb button,.pbtns button{font-size:12px;padding:3px 9px;margin:2px;border:1px solid #bbb;background:#fff;border-radius:6px;cursor:pointer}
+ .hint{text-align:center;color:#555;font-size:13px;padding:4px}
+ .leg{font-size:12px;color:#555;border-top:1px solid #ddd;margin-top:8px;padding-top:8px}
+ .it{border:1px solid #ddd;border-radius:8px;padding:8px 10px;margin:6px 0}
+ .it.dash{border-style:dashed;color:#666}
+ .it .l{font-size:11px;color:#666}
+ .it .h{font-size:14px;font-weight:600}
+ .it.alert{background:#fdecec}.it.alert .h{color:#a32d2d}
+ .it.watch{background:#fdf3d7}.it.watch .h{color:#854f0b}
+ .it.good{background:#e8f4e3}.it.good .h{color:#3b6d11}
+ .it .n{font-size:12px;color:#444;margin-top:3px}
+ .it .f{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#888;margin-top:5px;flex-wrap:wrap}
+ .it .f a{color:#0b5cad;font-size:12px}
+ .gh{display:flex;gap:6px;align-items:baseline;border-bottom:1px solid #ddd;margin:12px 0 4px;padding-bottom:3px;font-size:13px;font-weight:600}
+ .gh span{font-weight:400;font-size:11px;color:#888}
+ footer{margin-top:18px;font-size:11px;color:#666;border-top:1px solid #ddd;padding-top:10px}
+ svg path.pref{cursor:pointer}
 </style>
 </head>
 <body>
-<h1>九州の状況</h1>
-<p class="muted">このサイトは準備中です。災害時に必要な情報を1か所で確認できるようにすることを目指しています。</p>
-
-<div class="box">
-  <strong>それまでの間、公式情報はこちら</strong>
-  <ul>
-    <li><a href="https://www.kyuden.co.jp/td_teiden/kyushu.html">停電情報（九州電力送配電）</a></li>
-    <li><a href="https://www.jrkyushu.co.jp/trains/info/">鉄道の運行情報（JR九州）</a></li>
-    <li><a href="https://www.w-nexco.co.jp/">高速道路の情報（NEXCO西日本）</a></li>
-    <li><a href="https://www.jma.go.jp/bosai/">気象・地震・津波（気象庁）</a></li>
-    <li><a href="https://www.mod.go.jp/j/press/kisha/index.html">自衛隊の活動（防衛省 大臣会見）</a></li>
-    <li><a href="https://www3.nhk.or.jp/news/">NHKニュース・防災</a></li>
-  </ul>
+<div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap">
+ <h1>九州の状況</h1><div class="upd" id="upd">読み込み中…</div>
 </div>
-
+<div class="wrap" id="wrap">
+ <div class="card">
+  <div class="crumb" id="crumb" style="display:none"></div>
+  <svg id="map" viewBox="0 0 340 430" style="width:100%;max-width:400px;display:block;margin:0 auto"></svg>
+  <div class="hint" id="hint">県をタップすると詳しい状況が表示されます</div>
+  <div class="pbtns" id="pbtns" style="text-align:center"></div>
+  <div class="leg">色は影響の大きさ（<span style="color:#a32d2d">赤=大</span> / <span style="color:#854f0b">黄=一部</span> / グレー=情報なし）</div>
+ </div>
+ <div class="panel" id="panel"></div>
+</div>
+<div class="card" style="margin-top:12px;font-size:12px;color:#555">
+ 地震・津波の被害状況など詳しい情報は
+ <a href="https://www.jma.go.jp/bosai/">気象庁</a> /
+ <a href="https://www3.nhk.or.jp/news/">NHKニュース・防災</a>
+</div>
 <footer>
-  個人が運営する非公式のサイトです。掲載内容より、必ず各機関の公式情報を優先してください。
+ 個人が運営する非公式サイトです。掲載内容より、必ず各機関の公式情報を優先してください。<br>
+ 出典：防衛省ウェブサイト（大臣会見）ほか各項目に記載。鉄道・道路等は事実の要約であり、詳細は各リンク先をご確認ください。
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script>
+(function(){
+var W=340,H=430,PREFS={"福岡県":"40","佐賀県":"41","長崎県":"42","熊本県":"43","大分県":"44","宮崎県":"45","鹿児島県":"46"},
+PN={"40":"福岡県","41":"佐賀県","42":"長崎県","43":"熊本県","44":"大分県","45":"宮崎県","46":"鹿児島県"},
+CAT={rail:"鉄道",road:"道路",power:"停電",water:"給水",gov:"自衛隊・政府"},
+GROUPS=[["移動","鉄道・道路",["rail","road"]],["ライフライン","電気・水道",["power","water"]],["支援","自衛隊・給水",["gov"]]];
+var DATA=null,path=null,fb={},cur=null;
+function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+function itemsFor(c){if(!DATA)return[];return DATA.items.filter(function(i){return i.pref===c||(i.pref==null&&i.category==="gov")})}
+function tone(i){if(i.status!=="ok")return"dash";if(i.level==="alert")return"alert";if(i.level==="watch")return"watch";if(i.level==="good"||i.level==="normal")return"good";return"dash"}
+function fmt(t){if(!t)return"";var d=new Date(t);return(d.getMonth()+1)+"/"+d.getDate()+" "+d.getHours()+":"+("0"+d.getMinutes()).slice(-2)+"時点"}
+function card(i){
+ var h='<div class="it '+tone(i)+'"><div class="l">'+esc(CAT[i.category]||i.category)+'</div>';
+ h+='<div class="h">'+esc(i.headline)+'</div>';
+ if(i.detail)h+='<div class="n">'+esc(i.detail)+'</div>';
+ if(i.note)h+='<div class="n">'+esc(i.note)+'</div>';
+ h+='<div class="f"><span>'+esc(i.source_name||"")+" "+fmt(i.source_updated_at)+'</span>';
+ if(i.source_url)h+='<a href="'+i.source_url+'" target="_blank" rel="noopener">公式情報 →</a>';
+ return h+'</div></div>'}
+function noneCard(cat){return'<div class="it dash"><div class="l">'+esc(CAT[cat])+'</div><div class="h" style="font-weight:400;font-size:13px;color:#777">現在、この情報はありません</div></div>'}
+function show(c){
+ cur=c;
+ var its=itemsFor(c),h='<div style="font-size:16px;font-weight:600;margin-bottom:8px">'+esc(PN[c])+'</div>';
+ GROUPS.forEach(function(g){
+  h+='<div class="gh">'+g[0]+'<span>'+g[1]+'</span></div>';
+  g[2].forEach(function(cat){
+   var found=its.filter(function(i){return i.category===cat});
+   if(found.length)found.forEach(function(i){h+=card(i)});else h+=noneCard(cat)})});
+ var p=document.getElementById("panel");p.innerHTML=h;p.style.display="block";
+ document.getElementById("wrap").className="wrap two";
+ document.getElementById("hint").style.display="none";
+ var cr=document.getElementById("crumb");cr.style.display="block";
+ cr.innerHTML='<button onclick="KD.reset()">九州全体</button> › <b style="font-size:12px">'+esc(PN[c])+'</b>';
+ if(path)d3.selectAll("#map path.pref").attr("stroke-width",function(d){return PREFS[KD.nm(d)]===c?2.5:1})}
+window.KD={reset:function(){cur=null;document.getElementById("panel").style.display="none";
+ document.getElementById("wrap").className="wrap";document.getElementById("hint").style.display="block";
+ document.getElementById("crumb").style.display="none";
+ if(path)d3.selectAll("#map path.pref").attr("stroke-width",1)},
+ nm:function(d){var p=d.properties||{};return p.nam_ja||p.name_ja||p.nam||""}};
+function lvlOf(c){var m=0;itemsFor(c).forEach(function(i){if(i.status!=="ok")return;
+ if(i.level==="alert")m=Math.max(m,2);else if(i.level==="watch")m=Math.max(m,1)});return m}
+function paint(){if(!path)return;
+ d3.selectAll("#map path.pref").attr("fill",function(d){var l=lvlOf(PREFS[KD.nm(d)]);
+  return l===2?"#fdecec":l===1?"#fdf3d7":"#fff"})
+  .attr("stroke",function(d){return lvlOf(PREFS[KD.nm(d)])===2?"#d88":"#999"})}
+var pb=document.getElementById("pbtns");
+Object.keys(PREFS).forEach(function(n){var b=document.createElement("button");
+ b.textContent=n.replace("県","");b.onclick=function(){show(PREFS[n])};pb.appendChild(b)});
+fetch("data.json?"+Date.now()).then(function(r){return r.json()}).then(function(j){
+ DATA=j;document.getElementById("upd").textContent="最終更新 "+fmt(j.generated_at);paint();
+ if(cur)show(cur)}).catch(function(){
+ document.getElementById("upd").textContent="データを取得できていません（各公式サイトをご確認ください）"});
+fetch("https://cdn.jsdelivr.net/gh/dataofjapan/land@master/japan.topojson").then(function(r){return r.json()}).then(function(t){
+ var key=Object.keys(t.objects)[0];
+ var fs=topojson.feature(t,t.objects[key]).features.filter(function(f){return PREFS[KD.nm(f)]});
+ fs.forEach(function(f){if(f.geometry&&f.geometry.type==="MultiPolygon")
+  f.geometry.coordinates=f.geometry.coordinates.filter(function(p){return p[0][0][1]>30.2})});
+ var proj=d3.geoMercator();proj.fitExtent([[8,8],[W-8,H-8]],{type:"FeatureCollection",features:fs});
+ path=d3.geoPath(proj);var g=d3.select("#map").append("g");
+ g.selectAll("path").data(fs).enter().append("path").attr("class","pref").attr("d",path)
+  .attr("fill","#fff").attr("stroke","#999").attr("stroke-width",1)
+  .on("click",function(e,d){show(PREFS[KD.nm(d)])});
+ g.selectAll("text").data(fs).enter().append("text")
+  .attr("x",function(d){return path.centroid(d)[0]}).attr("y",function(d){return path.centroid(d)[1]+4})
+  .attr("text-anchor","middle").style("font-size","11px").style("fill","#444").style("pointer-events","none")
+  .style("paint-order","stroke").style("stroke","#fff").style("stroke-width","3px")
+  .text(function(d){return KD.nm(d).replace("県","")});
+ paint()}).catch(function(){document.getElementById("map").style.display="none"});
+})();
+</script>
 </body>
 </html>
