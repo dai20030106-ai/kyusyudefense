@@ -39,7 +39,17 @@ def wareki_to_iso(s):
                     int(t.group(1)) if t else 0,int(t.group(2)) if t else 0,
                     tzinfo=JST).isoformat(timespec="seconds")
 
-# ---------- 防衛省（給水の場所を構造化） ----------
+# ---------- 防衛省（支援の種類ごとに場所を構造化） ----------
+SUPPORT_TYPES = [
+    ("給水", "給水支援", "water", "good"),
+    ("入浴", "入浴支援", "support", "good"),
+    ("避難所", "避難所としての開放", "support", "good"),
+    ("人命救助", "人命救助・捜索", "support", "alert"),
+    ("輸送", "物資・患者の輸送", "support", "good"),
+]
+PLACE = r"((?:[一-龥ァ-ヶA-Za-zＡ-Ｚ]{1,8})(?:駐屯地|基地|モール|病院|空港|体育館|小学校|中学校|高校|大学)[一-龥]{0,4})"
+CITY  = r"([一-龥]{1,6}(?:市|町|村))"
+
 try:
     js = get("https://www.mod.go.jp/j/press/kisha/kisha_ja.js")
     ent = re.findall(r'date:"([^"]+)"[^}]*?title:"([^"]+)"[^}]*?url:"([^"]+)"', js)
@@ -47,33 +57,31 @@ try:
     if dis:
         d,t,u = dis[0]
         full = "https://www.mod.go.jp/j/press/kisha/" + u
-        body = strip_tags(get(full))
-        sents = [s.strip() for s in body.split("。") if s.strip()]
-        water = [s for s in sents if "給水" in s]
-        jsdf  = [s for s in sents if ("態勢" in s or "人命救助" in s or "救助活動" in s)]
+        body = norm(strip_tags(get(full)))
+        sents = [x.strip() for x in body.split("。") if x.strip()]
         iso = wareki_to_iso(d)
-        add(id="gov.mod",category="gov",pref=None,level="alert",headline=t,detail=d,
-            note=("。".join(jsdf[:2])+"。")[:300] if jsdf else None,
+        add(id="gov.mod",category="gov",pref=None,level="alert",
+            headline="自衛隊の活動状況（防衛大臣会見）",detail=d,
+            note=("。".join([x for x in sents if "態勢" in x][:1])+"。") if any("態勢" in x for x in sents) else None,
             source_name="防衛省（大臣会見）",source_url=full,source_updated_at=iso)
-        if water:
-            wtxt = norm("。".join(water))
-            spots = re.findall(r"([一-龥]{1,6}(?:市|町|村))(?:[^。0-9]{0,4})([0-9]+)\s*か所", wtxt)
-            tm = re.search(r"(午前|午後)?\s*([0-9]+)\s*時\s*([0-9]+)?\s*分?\s*以降", wtxt)
-            plan = []
-            for s in water:
-                if "予定" in s:
-                    plan += re.findall(r"([一-龥]{1,6}(?:市|町|村))", norm(s))
-            plan = [p for p in dict.fromkeys(plan) if p not in [a for a,_ in spots]]
-            det = []
-            if spots:
-                det.append("実施中: " + " ／ ".join(f"{a} {n}か所" for a,n in spots)
-                           + (f"（{tm.group(0)}）" if tm else ""))
-            if plan:
-                det.append("開始予定: " + "・".join(plan))
-            add(id="water.mod",category="water",pref="43",level="good",
-                headline="自衛隊の給水支援",
-                detail=" ／ ".join(det) if det else None,
-                note=None if det else ("。".join(water[:2])+"。")[:300],
+        for kw, label, cat, lvl in SUPPORT_TYPES:
+            hit = [x for x in sents if kw in x]
+            if not hit: continue
+            txt = "。".join(hit)
+            spots = re.findall(CITY + r"[^。0-9]{0,4}([0-9]+)\s*か所", txt)
+            fac = list(dict.fromkeys(re.findall(PLACE, txt)))
+            cities = [c for c in dict.fromkeys(re.findall(CITY, txt))
+                      if c not in [a for a,_ in spots]]
+            tm = re.search(r"(?:午前|午後)?\s*[0-9]+\s*時\s*[0-9]*\s*分?\s*以降", txt)
+            parts = []
+            if spots: parts.append(" ／ ".join(f"{a} {n}か所" for a,n in spots))
+            if fac:   parts.append(" ／ ".join(fac[:4]))
+            if cities:parts.append("・".join(cities[:5]))
+            if tm:    parts.append(f"（{tm.group(0)}）")
+            add(id=f"support.{kw}",category=cat,pref="43",level=lvl,
+                headline=label,
+                detail=" ／ ".join(parts) if parts else None,
+                note=None if parts else (txt[:180]+"。"),
                 source_name="防衛省（大臣会見）",source_url=full,source_updated_at=iso)
     else:
         add(id="gov.mod",category="gov",pref=None,level="normal",
@@ -85,6 +93,54 @@ except Exception as e:
         headline="現在、防衛省の情報を取得できていません",
         source_name="防衛省",source_url="https://www.mod.go.jp/j/press/kisha/index.html",
         status="unavailable")
+
+# ---------- 避難所（熊本県 防災情報くまもと） ----------
+try:
+    sh = json.loads(get("https://portal.bousai.pref.kumamoto.jp/data/shelter/shelter.json", timeout=40))
+    arr = sh if isinstance(sh, list) else (sh.get("items") or list(sh.values())[0])
+    open_sh = [x for x in arr
+               if str(x.get("shelterStartTimestamp") or "").strip()
+               and not str(x.get("shelterEndTimestamp") or "").strip()]
+    if open_sh:
+        by = {}
+        for x in open_sh:
+            by[x.get("municipalityName") or "―"] = by.get(x.get("municipalityName") or "―", 0) + 1
+        top = sorted(by.items(), key=lambda kv: -kv[1])
+        welfare = sum(1 for x in open_sh if str(x.get("welfareEvacShFlg")) == "1")
+        latest = max((str(x.get("shelterStartTimestamp") or "") for x in open_sh), default="")
+        siso = None
+        m = re.match(r"(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})", latest)
+        if m:
+            siso = datetime(*[int(g) for g in m.groups()], tzinfo=JST).isoformat(timespec="seconds")
+        add(id="shelter.43",category="shelter",pref="43",level="good",
+            headline=f"避難所 {len(open_sh)}か所が開設中",
+            detail="市町村別: " + " ／ ".join(f"{k} {v}か所" for k,v in top[:8])
+                   + (f" ／ うち福祉避難所 {welfare}か所" if welfare else ""),
+            note="場所・住所・混雑状況は公式ページの一覧と地図で確認できます。",
+            source_name="防災情報くまもと（熊本県）",
+            source_url="https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
+            source_updated_at=siso)
+    else:
+        add(id="shelter.43",category="shelter",pref="43",level="normal",
+            headline="現在、開設中の避難所はありません",
+            source_name="防災情報くまもと（熊本県）",
+            source_url="https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter")
+except Exception as e:
+    print("shelter error:", e, file=sys.stderr)
+    add(id="shelter.43",category="shelter",pref="43",level="unknown",
+        headline="避難所の開設状況を取得できていません",
+        source_name="防災情報くまもと（熊本県）",
+        source_url="https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
+        status="unavailable")
+
+for c in PREFS:
+    if c == "43": continue
+    add(id=f"shelter.{c}",category="shelter",pref=c,
+        headline="避難所の開設状況は各自治体・県のページをご確認ください",
+        detail="現在、機械で読み取れる形で公開されているのは熊本県のみです",
+        source_name="各県の防災情報",
+        source_url="https://www.bousai.go.jp/link/index.html",
+        status="link_only")
 
 # ---------- NEXCO西日本（通行止め区間を構造化） ----------
 try:
