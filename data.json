@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-29T20:48:40+09:00",
+ "generated_at": "2026-07-29T20:53:12+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -22,19 +22,6 @@
    "headline": "給水支援",
    "detail": "上天草市 3か所 ／ 宇土市・御船町・嘉島町",
    "note": null,
-   "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0729b_r.html",
-   "source_updated_at": "2026-07-29T18:33:00+09:00",
-   "status": "ok"
-  },
-  {
-   "id": "support.避難所",
-   "category": "support",
-   "pref": "43",
-   "level": "good",
-   "headline": "避難所としての開放",
-   "detail": null,
-   "note": "その後、陸上自衛隊の車両で約150台のクーラーを避難所に輸送し、残りのクーラーは被災地の集積所等に輸送する予定です。",
    "source_name": "防衛省（大臣会見）",
    "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0729b_r.html",
    "source_updated_at": "2026-07-29T18:33:00+09:00",
@@ -71,12 +58,12 @@
    "category": "shelter",
    "pref": "43",
    "level": "good",
-   "headline": "避難所 406か所が開設中",
-   "detail": "市町村別: 熊本市 182か所 ／ 八代市 60か所 ／ 天草市 48か所 ／ 水俣市 14か所 ／ 宇土市 9か所 ／ 人吉市 8か所 ／ 宇城市 7か所 ／ 合志市 7か所 ／ うち福祉避難所 17か所",
+   "headline": "避難所 407か所が開設中",
+   "detail": "市町村別: 熊本市 182か所 ／ 八代市 61か所 ／ 天草市 48か所 ／ 水俣市 14か所 ／ 宇土市 9か所 ／ 人吉市 8か所 ／ 宇城市 7か所 ／ 合志市 7か所 ／ うち福祉避難所 17か所",
    "note": "場所・住所・混雑状況は公式ページの一覧と地図で確認できます。",
    "source_name": "防災情報くまもと（熊本県）",
    "source_url": "https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
-   "source_updated_at": "2026-07-29T20:18:00+09:00",
+   "source_updated_at": "2026-07-29T20:20:00+09:00",
    "status": "ok"
   },
   {
