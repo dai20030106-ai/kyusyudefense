@@ -5,17 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>九州の状況</title>
 <style>
- body{font-family:sans-serif;margin:0 auto;max-width:760px;padding:12px;color:#222;line-height:1.6}
+ body{font-family:sans-serif;margin:0 auto;max-width:780px;padding:12px;color:#222;line-height:1.6}
  h1{font-size:19px;margin:4px 0}
  .upd{color:#666;font-size:12px}
  .wrap{display:grid;grid-template-columns:1fr;gap:12px}
- .wrap.two{grid-template-columns:minmax(0,320px) 1fr}
- @media(max-width:640px){.wrap.two{grid-template-columns:1fr}}
+ .wrap.two{grid-template-columns:minmax(0,330px) 1fr}
+ @media(max-width:660px){.wrap.two{grid-template-columns:1fr}}
  .card{background:#f6f6f4;border-radius:10px;padding:10px}
  .panel{background:#fff;border:1px solid #ddd;border-radius:10px;padding:12px;display:none}
  .crumb button,.pbtns button{font-size:12px;padding:3px 9px;margin:2px;border:1px solid #bbb;background:#fff;border-radius:6px;cursor:pointer}
+ .crumb{font-size:12px;margin-bottom:6px}
  .hint{text-align:center;color:#555;font-size:13px;padding:4px}
  .leg{font-size:12px;color:#555;border-top:1px solid #ddd;margin-top:8px;padding-top:8px}
+ .note{font-size:12px;color:#666;background:#f2f2ef;border-radius:6px;padding:6px 9px;margin-bottom:8px}
  .it{border:1px solid #ddd;border-radius:8px;padding:8px 10px;margin:6px 0}
  .it.dash{border-style:dashed;color:#666}
  .it .l{font-size:11px;color:#666}
@@ -29,7 +31,7 @@
  .gh{display:flex;gap:6px;align-items:baseline;border-bottom:1px solid #ddd;margin:12px 0 4px;padding-bottom:3px;font-size:13px;font-weight:600}
  .gh span{font-weight:400;font-size:11px;color:#888}
  footer{margin-top:18px;font-size:11px;color:#666;border-top:1px solid #ddd;padding-top:10px}
- svg path.pref{cursor:pointer}
+ svg path.pref,svg path.area{cursor:pointer}
 </style>
 </head>
 <body>
@@ -42,7 +44,7 @@
   <svg id="map" viewBox="0 0 340 430" style="width:100%;max-width:400px;display:block;margin:0 auto"></svg>
   <div class="hint" id="hint">県をタップすると詳しい状況が表示されます</div>
   <div class="pbtns" id="pbtns" style="text-align:center"></div>
-  <div class="leg">色は影響の大きさ（<span style="color:#a32d2d">赤=大</span> / <span style="color:#854f0b">黄=一部</span> / グレー=情報なし）</div>
+  <div class="leg">色は影響の大きさ（<span style="color:#a32d2d">赤=大</span> / <span style="color:#854f0b">黄=一部</span> / グレー=情報なし）。県の中では気象庁の区分でエリアに分かれます。</div>
  </div>
  <div class="panel" id="panel"></div>
 </div>
@@ -62,14 +64,38 @@
 var W=340,H=430,PREFS={"福岡県":"40","佐賀県":"41","長崎県":"42","熊本県":"43","大分県":"44","宮崎県":"45","鹿児島県":"46"},
 PN={"40":"福岡県","41":"佐賀県","42":"長崎県","43":"熊本県","44":"大分県","45":"宮崎県","46":"鹿児島県"},
 CAT={rail:"鉄道",road:"道路",power:"停電",water:"給水",gov:"自衛隊・政府"},
-GROUPS=[["移動","鉄道・道路",["rail","road"]],["ライフライン","電気・水道",["power","water"]],["支援","自衛隊・給水",["gov"]]];
-var DATA=null,path=null,fb={},cur=null;
+GROUPS=[["移動","鉄道・道路",["rail","road"]],["ライフライン","電気・水道",["power","water"]],["支援","自衛隊・給水",["gov"]]],
+ANAMES={"40":["福岡地方","北九州地方","筑豊地方","筑後地方"],"41":["北部","南部"],
+"42":["北部","南部","壱岐・対馬地方","五島地方"],"43":["熊本地方","阿蘇地方","天草・芦北地方","球磨地方"],
+"44":["北部","中部","西部","南部"],"45":["南部平野部","北部平野部","南部山沿い","北部山沿い"],
+"46":["薩摩地方","大隅地方","種子島・屋久島地方"]};
+function inS(c,a){return a.indexOf(c)>=0}
+var DROP46=[46303,46304,46222,46523,46524,46525,46527,46529,46530,46531,46532,46533,46534,46535];
+function classify(p,c){
+ if(p==="43"){if(inS(c,[43203,43501,43505,43506,43507,43510,43511,43512,43513,43514]))return 3;
+  if(inS(c,[43205,43212,43215,43482,43484,43531]))return 2;
+  if(inS(c,[43214,43423,43424,43425,43428,43432,43433]))return 1;return 0}
+ if(p==="40"){if((c>=40101&&c<=40109)||inS(c,[40213,40214,40215,40381,40382,40383,40384,40621,40625,40642,40646,40647]))return 1;
+  if(inS(c,[40204,40205,40206,40226,40227,40401,40402,40421,40601,40602,40604,40605,40608,40609,40610]))return 2;
+  if(inS(c,[40202,40203,40207,40210,40211,40212,40216,40225,40228,40229,40447,40448,40503,40522,40544]))return 3;return 0}
+ if(p==="41")return inS(c,[41202,41205,41387,41401])?0:1;
+ if(p==="42"){if(inS(c,[42209,42210]))return 2;if(inS(c,[42211,42411,42383]))return 3;
+  if(inS(c,[42202,42207,42208,42212,42321,42322,42323,42391]))return 0;return 1}
+ if(p==="44"){if(inS(c,[44203,44209,44210,44211,44214,44322,44341]))return 0;
+  if(inS(c,[44204,44461,44462]))return 2;if(inS(c,[44205,44206,44207,44208,44212]))return 3;return 1}
+ if(p==="45"){if(inS(c,[45202,45205,45209,45341,45361]))return 2;
+  if(inS(c,[45403,45429,45430,45431,45441,45442,45443]))return 3;
+  if(inS(c,[45203,45206,45208,45401,45402,45404,45405,45406,45421]))return 1;return 0}
+ if(p==="46"){if(inS(c,DROP46))return -1;
+  if(inS(c,[46203,46214,46217,46221,46468,46482,46490,46491,46492]))return 1;
+  if(inS(c,[46213,46501,46502,46505]))return 2;return 0}
+ return 0}
+var DATA=null,path=null,fb={},cur=null,curArea=null,view="ky",muni={},areaFeats=null,g,areaG=null,lblG=null;
 function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
 function itemsFor(c){if(!DATA)return[];return DATA.items.filter(function(i){return i.pref===c||(i.pref==null&&i.category==="gov")})}
 function tone(i){if(i.status!=="ok")return"dash";if(i.level==="alert")return"alert";if(i.level==="watch")return"watch";if(i.level==="good"||i.level==="normal")return"good";return"dash"}
 function fmt(t){if(!t)return"";var d=new Date(t);return(d.getMonth()+1)+"/"+d.getDate()+" "+d.getHours()+":"+("0"+d.getMinutes()).slice(-2)+"時点"}
-function card(i){
- var h='<div class="it '+tone(i)+'"><div class="l">'+esc(CAT[i.category]||i.category)+'</div>';
+function card(i){var h='<div class="it '+tone(i)+'"><div class="l">'+esc(CAT[i.category]||i.category)+'</div>';
  h+='<div class="h">'+esc(i.headline)+'</div>';
  if(i.detail)h+='<div class="n">'+esc(i.detail)+'</div>';
  if(i.note)h+='<div class="n">'+esc(i.note)+'</div>';
@@ -77,53 +103,114 @@ function card(i){
  if(i.source_url)h+='<a href="'+i.source_url+'" target="_blank" rel="noopener">公式情報 →</a>';
  return h+'</div></div>'}
 function noneCard(cat){return'<div class="it dash"><div class="l">'+esc(CAT[cat])+'</div><div class="h" style="font-weight:400;font-size:13px;color:#777">現在、この情報はありません</div></div>'}
-function show(c){
- cur=c;
- var its=itemsFor(c),h='<div style="font-size:16px;font-weight:600;margin-bottom:8px">'+esc(PN[c])+'</div>';
- GROUPS.forEach(function(g){
-  h+='<div class="gh">'+g[0]+'<span>'+g[1]+'</span></div>';
-  g[2].forEach(function(cat){
-   var found=its.filter(function(i){return i.category===cat});
-   if(found.length)found.forEach(function(i){h+=card(i)});else h+=noneCard(cat)})});
- var p=document.getElementById("panel");p.innerHTML=h;p.style.display="block";
+function panelHTML(c,areaName){
+ var its=itemsFor(c);
+ var h='<div style="font-size:16px;font-weight:600;margin-bottom:6px">'+esc(PN[c])+(areaName?" "+esc(areaName):"")+'</div>';
+ if(areaName)h+='<div class="note">この地域だけの情報は、まだ提供元から地域単位では公開されていないため、'+esc(PN[c])+'全体の情報を表示しています</div>';
+ else if(ANAMES[c])h+='<div class="note">地図のエリアをタップすると絞り込めます ／ 薄い県をタップで移動</div>';
+ GROUPS.forEach(function(gr){
+  h+='<div class="gh">'+gr[0]+'<span>'+gr[1]+'</span></div>';
+  gr[2].forEach(function(cat){var f=its.filter(function(i){return i.category===cat});
+   if(f.length)f.forEach(function(i){h+=card(i)});else h+=noneCard(cat)})});
+ return h}
+function showPanel(html){var p=document.getElementById("panel");p.innerHTML=html;p.style.display="block";
  document.getElementById("wrap").className="wrap two";
- document.getElementById("hint").style.display="none";
- var cr=document.getElementById("crumb");cr.style.display="block";
- cr.innerHTML='<button onclick="KD.reset()">九州全体</button> › <b style="font-size:12px">'+esc(PN[c])+'</b>';
- if(path)d3.selectAll("#map path.pref").attr("stroke-width",function(d){return PREFS[KD.nm(d)]===c?2.5:1})}
-window.KD={reset:function(){cur=null;document.getElementById("panel").style.display="none";
- document.getElementById("wrap").className="wrap";document.getElementById("hint").style.display="block";
- document.getElementById("crumb").style.display="none";
- if(path)d3.selectAll("#map path.pref").attr("stroke-width",1)},
- nm:function(d){var p=d.properties||{};return p.nam_ja||p.name_ja||p.nam||""}};
+ document.getElementById("hint").style.display="none"}
+function crumb(segs){var el=document.getElementById("crumb");
+ if(!segs.length){el.style.display="none";return}
+ el.style.display="block";el.innerHTML="";
+ segs.forEach(function(s,i){
+  if(i)el.appendChild(document.createTextNode(" › "));
+  if(s.fn){var b=document.createElement("button");b.textContent=s.t;b.onclick=s.fn;el.appendChild(b)}
+  else{var sp=document.createElement("b");sp.textContent=s.t;el.appendChild(sp)}})}
+function nm(d){var p=d.properties||{};return p.nam_ja||p.name_ja||p.nam||""}
+function tf(b,pad){var dx=b[1][0]-b[0][0],dy=b[1][1]-b[0][1];
+ var k=pad/Math.max(dx/W,dy/H);
+ return{k:k,tx:W/2-k*(b[0][0]+b[1][0])/2,ty:H/2-k*(b[0][1]+b[1][1])/2}}
+function clearArea(){if(areaG){areaG.remove();areaG=null}if(lblG){lblG.selectAll("*").remove()}areaFeats=null}
+function reset(){view="ky";cur=null;curArea=null;clearArea();crumb([]);
+ g.transition().duration(400).attr("transform",null);
+ g.selectAll("path.pref").transition().duration(400).style("opacity",1);
+ document.getElementById("panel").style.display="none";
+ document.getElementById("wrap").className="wrap";
+ document.getElementById("hint").style.display="block"}
+function loadMuni(c){if(muni[c])return Promise.resolve(muni[c]);
+ return fetch("https://cdn.jsdelivr.net/gh/smartnews-smri/japan-topography@main/data/municipality/topojson/s0010/N03-21_"+c+"_210101.json")
+ .then(function(r){return r.json()}).then(function(t){
+  var key=Object.keys(t.objects)[0],geoms=t.objects[key].geometries,n=ANAMES[c].length,by=[];
+  for(var i=0;i<n;i++)by.push([]);
+  geoms.forEach(function(gm){var idx=classify(c,parseInt(gm.properties.N03_007,10));
+   if(idx>=0&&idx<n)by[idx].push(gm)});
+  muni[c]=by.map(function(a){return a.length?{type:"Feature",geometry:topojson.merge(t,a)}:null});
+  return muni[c]})}
+function toPref(c){view="pref";cur=c;curArea=null;clearArea();
+ crumb([{t:"九州全体",fn:reset},{t:PN[c]}]);
+ showPanel(panelHTML(c,null));
+ var f=fb[c];if(!f||!path)return;
+ var b=path.bounds(f),t=tf(b,0.8);
+ g.selectAll("path.pref").transition().duration(450).style("opacity",function(d){return PREFS[nm(d)]===c?1:0.22});
+ g.transition().duration(450).attr("transform","translate("+t.tx+","+t.ty+") scale("+t.k+")");
+ loadMuni(c).then(function(feats){
+  if(view!=="pref"||cur!==c)return;
+  areaFeats=feats;
+  setTimeout(function(){
+   if(view!=="pref"||cur!==c)return;
+   areaG=g.append("g");
+   feats.forEach(function(af,idx){if(!af)return;
+    areaG.append("path").attr("class","area").attr("d",path(af))
+     .attr("fill","#fbfbf8").attr("stroke","#a99").attr("stroke-width",1)
+     .attr("vector-effect","non-scaling-stroke")
+     .on("click",function(){toArea(idx)})});
+   feats.forEach(function(af,idx){if(!af)return;
+    var ct=path.centroid(af),x=ct[0]*t.k+t.tx,y=ct[1]*t.k+t.ty;
+    lblG.append("text").attr("x",x).attr("y",y).attr("text-anchor","middle")
+     .style("font-size","11px").style("fill","#333").style("paint-order","stroke")
+     .style("stroke","#fff").style("stroke-width","3px").style("pointer-events","none")
+     .text(ANAMES[c][idx])})},470)}).catch(function(){})}
+function toArea(idx){if(!areaFeats||!areaFeats[idx])return;
+ view="area";curArea=idx;var c=cur;
+ crumb([{t:"九州全体",fn:reset},{t:PN[c],fn:function(){toPref(c)}},{t:ANAMES[c][idx]}]);
+ var f=areaFeats[idx],b=path.bounds(f),t=tf(b,0.7);
+ lblG.selectAll("*").remove();
+ if(areaG)areaG.selectAll("path").transition().duration(400).style("opacity",function(d,i){return i===idx?1:0.15});
+ g.transition().duration(450).attr("transform","translate("+t.tx+","+t.ty+") scale("+t.k+")")
+  .on("end",function(){if(view!=="area")return;
+   var ct=path.centroid(f),x=ct[0]*t.k+t.tx,y=ct[1]*t.k+t.ty;
+   lblG.append("text").attr("x",x).attr("y",y).attr("text-anchor","middle")
+    .style("font-size","13px").style("font-weight","600").style("fill","#333")
+    .style("paint-order","stroke").style("stroke","#fff").style("stroke-width","3px")
+    .text(ANAMES[c][idx])});
+ showPanel(panelHTML(c,ANAMES[c][idx]))}
 function lvlOf(c){var m=0;itemsFor(c).forEach(function(i){if(i.status!=="ok")return;
  if(i.level==="alert")m=Math.max(m,2);else if(i.level==="watch")m=Math.max(m,1)});return m}
 function paint(){if(!path)return;
- d3.selectAll("#map path.pref").attr("fill",function(d){var l=lvlOf(PREFS[KD.nm(d)]);
+ d3.selectAll("#map path.pref").attr("fill",function(d){var l=lvlOf(PREFS[nm(d)]);
   return l===2?"#fdecec":l===1?"#fdf3d7":"#fff"})
-  .attr("stroke",function(d){return lvlOf(PREFS[KD.nm(d)])===2?"#d88":"#999"})}
+  .attr("stroke",function(d){return lvlOf(PREFS[nm(d)])===2?"#d88":"#999"})}
 var pb=document.getElementById("pbtns");
 Object.keys(PREFS).forEach(function(n){var b=document.createElement("button");
- b.textContent=n.replace("県","");b.onclick=function(){show(PREFS[n])};pb.appendChild(b)});
+ b.textContent=n.replace("県","");b.onclick=function(){toPref(PREFS[n])};pb.appendChild(b)});
 fetch("data.json?"+Date.now()).then(function(r){return r.json()}).then(function(j){
  DATA=j;document.getElementById("upd").textContent="最終更新 "+fmt(j.generated_at);paint();
- if(cur)show(cur)}).catch(function(){
+ if(cur)view==="area"?toArea(curArea):toPref(cur)}).catch(function(){
  document.getElementById("upd").textContent="データを取得できていません（各公式サイトをご確認ください）"});
 fetch("https://cdn.jsdelivr.net/gh/dataofjapan/land@master/japan.topojson").then(function(r){return r.json()}).then(function(t){
  var key=Object.keys(t.objects)[0];
- var fs=topojson.feature(t,t.objects[key]).features.filter(function(f){return PREFS[KD.nm(f)]});
+ var fs=topojson.feature(t,t.objects[key]).features.filter(function(f){return PREFS[nm(f)]});
  fs.forEach(function(f){if(f.geometry&&f.geometry.type==="MultiPolygon")
-  f.geometry.coordinates=f.geometry.coordinates.filter(function(p){return p[0][0][1]>30.2})});
+  f.geometry.coordinates=f.geometry.coordinates.filter(function(p){return p[0][0][1]>30.2});
+  fb[PREFS[nm(f)]]=f});
  var proj=d3.geoMercator();proj.fitExtent([[8,8],[W-8,H-8]],{type:"FeatureCollection",features:fs});
- path=d3.geoPath(proj);var g=d3.select("#map").append("g");
+ path=d3.geoPath(proj);g=d3.select("#map").append("g");lblG=d3.select("#map").append("g");
  g.selectAll("path").data(fs).enter().append("path").attr("class","pref").attr("d",path)
   .attr("fill","#fff").attr("stroke","#999").attr("stroke-width",1)
-  .on("click",function(e,d){show(PREFS[KD.nm(d)])});
+  .on("click",function(e,d){var c=PREFS[nm(d)];
+   if(view==="ky")toPref(c);else if(c!==cur)toPref(c)});
  g.selectAll("text").data(fs).enter().append("text")
   .attr("x",function(d){return path.centroid(d)[0]}).attr("y",function(d){return path.centroid(d)[1]+4})
   .attr("text-anchor","middle").style("font-size","11px").style("fill","#444").style("pointer-events","none")
   .style("paint-order","stroke").style("stroke","#fff").style("stroke-width","3px")
-  .text(function(d){return KD.nm(d).replace("県","")});
+  .text(function(d){return nm(d).replace("県","")});
  paint()}).catch(function(){document.getElementById("map").style.display="none"});
 })();
 </script>
