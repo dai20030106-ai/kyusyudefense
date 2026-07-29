@@ -92,7 +92,7 @@ function classify(p,c){
  return 0}
 var DATA=null,path=null,fb={},cur=null,curArea=null,view="ky",muni={},areaFeats=null,g,areaG=null,lblG=null;
 function esc(s){return String(s==null?"":s).replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
-function itemsFor(c){if(!DATA)return[];return DATA.items.filter(function(i){return i.pref===c||(i.pref==null&&i.category==="gov")})}
+function itemsFor(c){if(!DATA)return[];return DATA.items.filter(function(i){return i.pref===c||i.pref==null})}
 function tone(i){if(i.status!=="ok")return"dash";if(i.level==="alert")return"alert";if(i.level==="watch")return"watch";if(i.level==="good"||i.level==="normal")return"good";return"dash"}
 function fmt(t){if(!t)return"";var d=new Date(t);return(d.getMonth()+1)+"/"+d.getDate()+" "+d.getHours()+":"+("0"+d.getMinutes()).slice(-2)+"時点"}
 function card(i){var h='<div class="it '+tone(i)+'"><div class="l">'+esc(CAT[i.category]||i.category)+'</div>';

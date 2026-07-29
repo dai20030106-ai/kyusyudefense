@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""九州災害情報ダッシュボード データ取得
-防衛省会見(給水・支援) / JR九州(鉄道・事実の要約のみ) を取得し data.json を出力。
-停電・道路は方針により link_only。失敗時は unavailable を出力し、決して落ちない。
-出典: 防衛省ウェブサイト(公共データ利用規約PDL1.0), JR九州(事実の記述+リンク)
+"""九州災害情報ダッシュボード データ取得 v2
+具体的な事実（給水の場所・か所数 / 高速道路の通行止め区間 / 鉄道の不通線区）を
+構造化して data.json に出力する。本文の転載はせず、事実のみを要約する。
+失敗時は unavailable を出力し、決して落ちない。
 """
 import json, re, sys, urllib.request
 from datetime import datetime, timezone, timedelta
@@ -11,12 +11,18 @@ JST = timezone(timedelta(hours=9))
 NOW = datetime.now(JST)
 PREFS = {"40":"福岡県","41":"佐賀県","42":"長崎県","43":"熊本県","44":"大分県","45":"宮崎県","46":"鹿児島県"}
 JRAREA = {"40":"fukhok","41":"sagnag","42":"sagnag","43":"kuma","44":"oita","45":"miya","46":"kago"}
-UA = {"User-Agent":"kyusyu-dashboard/0.1 (personal non-commercial; github.com/dai20030106-ai/kyusyudefense)"}
+UA = {"User-Agent":"kyusyu-dashboard/0.2 (personal non-commercial; github.com/dai20030106-ai/kyusyudefense)"}
 
 def get(url, timeout=25):
     req = urllib.request.Request(url, headers=UA)
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read().decode("utf-8", "replace")
+
+def strip_tags(h):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h))
+
+Z2H = str.maketrans("０１２３４５６７８９ＩＣＪＴＢＥ～", "0123456789ICJTBE〜")
+def norm(s): return s.translate(Z2H).replace("～","〜")
 
 items = []
 def add(**kw):
@@ -28,13 +34,12 @@ def add(**kw):
 def wareki_to_iso(s):
     m = re.search(r"令和(\d+)年(\d+)月(\d+)日", s)
     if not m: return None
-    y = 2018 + int(m.group(1))
     t = re.search(r"(\d{1,2}):(\d{2})", s)
-    return datetime(y,int(m.group(2)),int(m.group(3)),
-                    int(t.group(1)) if t else 0, int(t.group(2)) if t else 0,
+    return datetime(2018+int(m.group(1)),int(m.group(2)),int(m.group(3)),
+                    int(t.group(1)) if t else 0,int(t.group(2)) if t else 0,
                     tzinfo=JST).isoformat(timespec="seconds")
 
-# ---------- 防衛省（給水・支援） ----------
+# ---------- 防衛省（給水の場所を構造化） ----------
 try:
     js = get("https://www.mod.go.jp/j/press/kisha/kisha_ja.js")
     ent = re.findall(r'date:"([^"]+)"[^}]*?title:"([^"]+)"[^}]*?url:"([^"]+)"', js)
@@ -42,19 +47,33 @@ try:
     if dis:
         d,t,u = dis[0]
         full = "https://www.mod.go.jp/j/press/kisha/" + u
-        body = re.sub(r"<[^>]+>"," ",get(full))
-        body = re.sub(r"\s+"," ",body)
+        body = strip_tags(get(full))
         sents = [s.strip() for s in body.split("。") if s.strip()]
         water = [s for s in sents if "給水" in s]
         jsdf  = [s for s in sents if ("態勢" in s or "人命救助" in s or "救助活動" in s)]
         iso = wareki_to_iso(d)
-        add(id="gov.mod",category="gov",pref="43",level="alert",headline=t,detail=d,
+        add(id="gov.mod",category="gov",pref=None,level="alert",headline=t,detail=d,
             note=("。".join(jsdf[:2])+"。")[:300] if jsdf else None,
             source_name="防衛省（大臣会見）",source_url=full,source_updated_at=iso)
         if water:
+            wtxt = norm("。".join(water))
+            spots = re.findall(r"([一-龥]{1,6}(?:市|町|村))(?:[^。0-9]{0,4})([0-9]+)\s*か所", wtxt)
+            tm = re.search(r"(午前|午後)?\s*([0-9]+)\s*時\s*([0-9]+)?\s*分?\s*以降", wtxt)
+            plan = []
+            for s in water:
+                if "予定" in s:
+                    plan += re.findall(r"([一-龥]{1,6}(?:市|町|村))", norm(s))
+            plan = [p for p in dict.fromkeys(plan) if p not in [a for a,_ in spots]]
+            det = []
+            if spots:
+                det.append("実施中: " + " ／ ".join(f"{a} {n}か所" for a,n in spots)
+                           + (f"（{tm.group(0)}）" if tm else ""))
+            if plan:
+                det.append("開始予定: " + "・".join(plan))
             add(id="water.mod",category="water",pref="43",level="good",
-                headline="自衛隊が給水支援を実施・準備中",
-                note=("。".join(water[:2])+"。")[:300],
+                headline="自衛隊の給水支援",
+                detail=" ／ ".join(det) if det else None,
+                note=None if det else ("。".join(water[:2])+"。")[:300],
                 source_name="防衛省（大臣会見）",source_url=full,source_updated_at=iso)
     else:
         add(id="gov.mod",category="gov",pref=None,level="normal",
@@ -67,12 +86,38 @@ except Exception as e:
         source_name="防衛省",source_url="https://www.mod.go.jp/j/press/kisha/index.html",
         status="unavailable")
 
-# ---------- JR九州（事実の要約のみ・本文転載しない） ----------
+# ---------- NEXCO西日本（通行止め区間を構造化） ----------
 try:
-    t = re.sub(r"<[^>]+>"," ",get("https://www.jrkyushu.co.jp/trains/info/inc/info_top.html"))
-    t = re.sub(r"\s+"," ",t)
-    md = re.search(r"(\d{1,2})月(\d{1,2})日",t)
-    tm = re.search(r"(\d{1,2}):(\d{2})現在",t)
+    top = get("https://www.w-nexco.co.jp/")
+    ems = re.findall(r'href="[^"]*?(/emc/\d+\.html)"', top)
+    if ems:
+        eurl = "https://www.w-nexco.co.jp" + sorted(set(ems))[-1]
+        et = norm(strip_tags(get(eurl)))
+        ts = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})日(\d{1,2})時(\d{1,2})分\s*現在", et)
+        iso = None
+        if ts:
+            iso = datetime(int(ts.group(1)),int(ts.group(2)),int(ts.group(3)),
+                           int(ts.group(4)),int(ts.group(5)),tzinfo=JST).isoformat(timespec="seconds")
+        parts = re.split(r"解除", et, maxsplit=1)
+        SEC = r"([一-龥A-Z0-9]{2,14}(?:自動車道|道路|道))\s*(?:上下線|上り線|下り線)?\s*([一-龥ぁ-んA-Za-z0-9]{1,12}(?:IC|JCT|TB))\s*〜\s*([一-龥ぁ-んA-Za-z0-9]{1,12}(?:IC|JCT|TB))"
+        closed = [f"{a} {b}〜{c}" for a,b,c in re.findall(SEC, parts[0])]
+        opened = [f"{a} {b}〜{c}" for a,b,c in re.findall(SEC, parts[1])] if len(parts)>1 else []
+        closed = list(dict.fromkeys(closed)); opened = [o for o in dict.fromkeys(opened) if o not in closed]
+        if closed or opened:
+            add(id="road.emc",category="road",pref=None,
+                level="alert" if closed else "good",
+                headline=(f"高速道路 通行止め {len(closed)}区間" if closed else "通行止めは解除されました"),
+                detail=" ／ ".join(closed) if closed else None,
+                note=("解除済み: " + " ／ ".join(opened)) if opened else None,
+                source_name="NEXCO西日本",source_url=eurl,source_updated_at=iso)
+except Exception as e:
+    print("NEXCO error:", e, file=sys.stderr)
+
+# ---------- JR九州（不通・運休の線区を構造化） ----------
+try:
+    t = strip_tags(get("https://www.jrkyushu.co.jp/trains/info/inc/info_top.html"))
+    md = re.search(r"(\d{1,2})月(\d{1,2})日", t)
+    tm = re.search(r"(\d{1,2}):(\d{2})現在", t)
     iso = None
     if md:
         iso = datetime(NOW.year,int(md.group(1)),int(md.group(2)),
@@ -84,10 +129,15 @@ try:
         head, lvl = "遅れ等が発生しています（JR九州発表）","watch"
     else:
         head, lvl = "大きな運行支障の発表はありません","normal"
-    # 鮮度検証: 本文日付が3日以上前なら stale
-    stale = False
-    if iso and (NOW - datetime.fromisoformat(iso)).days >= 3:
-        stale = True
+    lines = []
+    try:
+        mid = norm(strip_tags(get("https://www.jrkyushu.co.jp/trains/info/inc/info_mid.html")))
+        for m in re.finditer(r"([一-龥ぁ-んA-Z0-9]{2,10}線)\s*[（(]?\s*([一-龥ぁ-ん0-9]{1,8}\s*[〜.・～]\s*[一-龥ぁ-ん0-9]{1,8})\s*(?:間)?[)）]?\s*[^。|]{0,25}?(不通|運転を取りやめ)", mid):
+            lines.append(f"{m.group(1)} {m.group(2).replace(' ','')}")
+        lines = list(dict.fromkeys(lines))[:8]
+    except Exception:
+        pass
+    stale = bool(iso and (NOW - datetime.fromisoformat(iso)).days >= 3)
     for c in PREFS:
         if stale:
             add(id=f"rail.{c}",category="rail",pref=c,level="unknown",
@@ -96,7 +146,7 @@ try:
                 source_updated_at=iso,status="stale")
         else:
             add(id=f"rail.{c}",category="rail",pref=c,level=lvl,headline=head,
-                detail="線区ごとの詳細は公式ページ・PDFで公開されています",
+                detail=("運転見合わせ中の線区（九州全体）: " + " ／ ".join(lines)) if lines else "線区ごとの詳細は公式ページ・PDFで公開されています",
                 source_name="JR九州",source_url=f"https://www.jrkyushu.co.jp/trains/info/{JRAREA[c]}.html",
                 source_updated_at=iso)
 except Exception as e:
@@ -107,7 +157,7 @@ except Exception as e:
             source_name="JR九州",source_url=f"https://www.jrkyushu.co.jp/trains/info/{JRAREA[c]}.html",
             status="unavailable")
 
-# ---------- 停電・道路（方針により link_only） ----------
+# ---------- 停電（link_only）・道路の県別リンク ----------
 for c in PREFS:
     add(id=f"power.{c}",category="power",pref=c,
         headline="停電の状況については、九州電力送配電のページをご参照ください",
@@ -115,8 +165,8 @@ for c in PREFS:
         source_url=f"https://www.kyuden.co.jp/td_teiden/syousai.html?pref={c}",
         status="link_only")
     add(id=f"road.{c}",category="road",pref=c,
-        headline="高速道路の通行止め状況は、NEXCO西日本のページをご参照ください",
-        source_name="NEXCO西日本",
+        headline="渋滞・工事などリアルタイムの道路状況はこちら",
+        source_name="NEXCO西日本 iHighway",
         source_url="https://ihighway.jp/pcsite/",
         status="link_only")
 
