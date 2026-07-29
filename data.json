@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-29T18:40:18+09:00",
+ "generated_at": "2026-07-29T20:27:09+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -7,11 +7,11 @@
    "pref": null,
    "level": "alert",
    "headline": "令和８年熊本地震に係る小泉防衛大臣臨時会見",
-   "detail": "令和8年7月29日（水）09:56～09:59",
-   "note": "さらに、イオンモール熊本では、第４２即応機動連隊を中心に、消防、警察と連携し、人命救助活動を実施するとともに、本日午前２時頃からは、第８飛行隊のヘリコプターにより入院患者の輸送を行っています。本日は、更に部隊を増強し、第８師団を中心とする隊員約４，６００名態勢で活動を行います。",
+   "detail": "令和8年7月29日（水）18:33～18:35",
+   "note": "まずイオンモール熊本では、第４２即応機動連隊１７０名の隊員が人命救助に当たり、午後から重機を用いて周囲の瓦礫の撤去を行うとともに、第８偵察隊がドローンを用いて建物内の状況を確認しております。また、八代市の日本製紙八代工場でも約２０名の隊員が人命救助に当たっており、引き続き、人命救助を最優先とした活動を行ってまいります。",
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0729a_r.html",
-   "source_updated_at": "2026-07-29T09:56:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0729b_r.html",
+   "source_updated_at": "2026-07-29T18:33:00+09:00",
    "status": "ok"
   },
   {
@@ -20,11 +20,11 @@
    "pref": "43",
    "level": "good",
    "headline": "自衛隊の給水支援",
-   "detail": "実施中: 八代市 1か所 ／ 宇城市 5か所（午前6時30分以降） ／ 開始予定: 宇土市・御船町",
+   "detail": "実施中: 上天草市 3か所",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0729a_r.html",
-   "source_updated_at": "2026-07-29T09:56:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0729b_r.html",
+   "source_updated_at": "2026-07-29T18:33:00+09:00",
    "status": "ok"
   },
   {
@@ -37,7 +37,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/fukhok.html",
-   "source_updated_at": "2026-07-29T18:00:00+09:00",
+   "source_updated_at": "2026-07-30T18:00:00+09:00",
    "status": "ok"
   },
   {
@@ -50,7 +50,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
-   "source_updated_at": "2026-07-29T18:00:00+09:00",
+   "source_updated_at": "2026-07-30T18:00:00+09:00",
    "status": "ok"
   },
   {
@@ -63,7 +63,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
-   "source_updated_at": "2026-07-29T18:00:00+09:00",
+   "source_updated_at": "2026-07-30T18:00:00+09:00",
    "status": "ok"
   },
   {
@@ -76,7 +76,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kuma.html",
-   "source_updated_at": "2026-07-29T18:00:00+09:00",
+   "source_updated_at": "2026-07-30T18:00:00+09:00",
    "status": "ok"
   },
   {
@@ -89,7 +89,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/oita.html",
-   "source_updated_at": "2026-07-29T18:00:00+09:00",
+   "source_updated_at": "2026-07-30T18:00:00+09:00",
    "status": "ok"
   },
   {
@@ -102,7 +102,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/miya.html",
-   "source_updated_at": "2026-07-29T18:00:00+09:00",
+   "source_updated_at": "2026-07-30T18:00:00+09:00",
    "status": "ok"
   },
   {
@@ -115,7 +115,111 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kago.html",
-   "source_updated_at": "2026-07-29T18:00:00+09:00",
+   "source_updated_at": "2026-07-30T18:00:00+09:00",
+   "status": "ok"
+  },
+  {
+   "id": "passable.40",
+   "category": "passable",
+   "pref": "40",
+   "level": "normal",
+   "headline": "この県を対象とした通行実績マップは公開されていません",
+   "detail": "大きな災害の際に、自動車メーカーが「実際に通れた道」の地図を対象地域向けに公開することがあります。",
+   "note": null,
+   "source_name": null,
+   "source_url": null,
+   "source_updated_at": null,
+   "status": "ok"
+  },
+  {
+   "id": "passable.41",
+   "category": "passable",
+   "pref": "41",
+   "level": "normal",
+   "headline": "この県を対象とした通行実績マップは公開されていません",
+   "detail": "大きな災害の際に、自動車メーカーが「実際に通れた道」の地図を対象地域向けに公開することがあります。",
+   "note": null,
+   "source_name": null,
+   "source_url": null,
+   "source_updated_at": null,
+   "status": "ok"
+  },
+  {
+   "id": "passable.42",
+   "category": "passable",
+   "pref": "42",
+   "level": "normal",
+   "headline": "この県を対象とした通行実績マップは公開されていません",
+   "detail": "大きな災害の際に、自動車メーカーが「実際に通れた道」の地図を対象地域向けに公開することがあります。",
+   "note": null,
+   "source_name": null,
+   "source_url": null,
+   "source_updated_at": null,
+   "status": "ok"
+  },
+  {
+   "id": "passable.43",
+   "category": "passable",
+   "pref": "43",
+   "level": "good",
+   "headline": "実際に通れた道の地図が公開されています",
+   "detail": "対象エリア: 熊本県宇城市震度7（7/28 16:30〜） ／ 自動車メーカーが走行データをもとに直近24時間に通行実績のあった道を地図で公開しています",
+   "note": "通行実績があっても現在通行できるとは限りません。緊急交通路など規制されている場合があるため、現地の規制・誘導に従ってください。",
+   "source_name": "トヨタ 通れた道マップ",
+   "source_url": "https://www.toyota.co.jp/jpn/auto/passable_route/map/",
+   "source_updated_at": null,
+   "status": "ok"
+  },
+  {
+   "id": "passable2.43",
+   "category": "passable",
+   "pref": "43",
+   "level": "good",
+   "headline": "通行実績情報マップ（ホンダ）",
+   "detail": "インターナビ装着車の走行軌跡から作成された通行実績です",
+   "note": null,
+   "source_name": "ホンダ／ゼンリンデータコム",
+   "source_url": "https://disaster-map.its-mo.com/",
+   "source_updated_at": null,
+   "status": "ok"
+  },
+  {
+   "id": "passable.44",
+   "category": "passable",
+   "pref": "44",
+   "level": "normal",
+   "headline": "この県を対象とした通行実績マップは公開されていません",
+   "detail": "大きな災害の際に、自動車メーカーが「実際に通れた道」の地図を対象地域向けに公開することがあります。",
+   "note": null,
+   "source_name": null,
+   "source_url": null,
+   "source_updated_at": null,
+   "status": "ok"
+  },
+  {
+   "id": "passable.45",
+   "category": "passable",
+   "pref": "45",
+   "level": "normal",
+   "headline": "この県を対象とした通行実績マップは公開されていません",
+   "detail": "大きな災害の際に、自動車メーカーが「実際に通れた道」の地図を対象地域向けに公開することがあります。",
+   "note": null,
+   "source_name": null,
+   "source_url": null,
+   "source_updated_at": null,
+   "status": "ok"
+  },
+  {
+   "id": "passable.46",
+   "category": "passable",
+   "pref": "46",
+   "level": "normal",
+   "headline": "この県を対象とした通行実績マップは公開されていません",
+   "detail": "大きな災害の際に、自動車メーカーが「実際に通れた道」の地図を対象地域向けに公開することがあります。",
+   "note": null,
+   "source_name": null,
+   "source_url": null,
+   "source_updated_at": null,
    "status": "ok"
   },
   {
