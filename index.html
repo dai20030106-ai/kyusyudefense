@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>九州の状況</title>
 <style>
  body{font-family:sans-serif;margin:0 auto;max-width:780px;padding:12px;color:#222;line-height:1.6}
@@ -28,8 +31,19 @@
  .it .n{font-size:12px;color:#444;margin-top:3px}
  .it .f{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:#888;margin-top:5px;flex-wrap:wrap}
  .it .f a{color:#0b5cad;font-size:12px}
- .gh{display:flex;gap:6px;align-items:baseline;border-bottom:1px solid #ddd;margin:12px 0 4px;padding-bottom:3px;font-size:13px;font-weight:600}
- .gh span{font-weight:400;font-size:11px;color:#888}
+ .acc{border:1px solid #ddd;border-radius:10px;margin:8px 0;overflow:hidden;background:#fff}
+ .acc>summary{list-style:none;cursor:pointer;padding:11px 12px;background:#f6f6f4}
+ .acc>summary::-webkit-details-marker{display:none}
+ .acc .t{display:flex;justify-content:space-between;align-items:center;gap:8px}
+ .acc .ttl{font-size:14px;font-weight:600}
+ .acc .sub{font-size:11px;color:#777;margin-top:2px}
+ .acc .badge{font-size:11px;padding:2px 8px;border-radius:999px;background:#eee;color:#555;white-space:nowrap}
+ .acc .badge.alert{background:#fdecec;color:#a32d2d}
+ .acc .badge.watch{background:#fdf3d7;color:#854f0b}
+ .acc .badge.good{background:#e8f4e3;color:#3b6d11}
+ .acc .body{padding:4px 10px 10px}
+ .acc .chev{font-size:11px;color:#888}
+ .acc[open] .chev{transform:rotate(180deg);display:inline-block}
  footer{margin-top:18px;font-size:11px;color:#666;border-top:1px solid #ddd;padding-top:10px}
  svg path.pref,svg path.area{cursor:pointer}
 </style>
@@ -64,7 +78,7 @@
 var W=340,H=430,PREFS={"福岡県":"40","佐賀県":"41","長崎県":"42","熊本県":"43","大分県":"44","宮崎県":"45","鹿児島県":"46"},
 PN={"40":"福岡県","41":"佐賀県","42":"長崎県","43":"熊本県","44":"大分県","45":"宮崎県","46":"鹿児島県"},
 CAT={rail:"鉄道",road:"道路",passable:"通れた道",power:"停電",water:"給水",shelter:"避難所",support:"自衛隊の支援",gov:"自衛隊・政府"},
-GROUPS=[["移動","鉄道・道路・通れた道",["rail","road","passable"]],["ライフライン","電気・水道",["power","water"]],["支援を受けられる場所","避難所・自衛隊",["shelter","support","gov"]]],
+GROUPS=[["交通状況","鉄道の状況・道路の状況・通れた道",["rail","road","passable"]],["ライフライン","電力（停電）・水道（給水）",["power","water"]],["支援","避難所・自衛隊の支援",["shelter","support","gov"]]]
 ANAMES={"40":["福岡地方","北九州地方","筑豊地方","筑後地方"],"41":["北部","南部"],
 "42":["北部","南部","壱岐・対馬地方","五島地方"],"43":["熊本地方","阿蘇地方","天草・芦北地方","球磨地方"],
 "44":["北部","中部","西部","南部"],"45":["南部平野部","北部平野部","南部山沿い","北部山沿い"],
@@ -109,9 +123,18 @@ function panelHTML(c,areaName){
  if(areaName)h+='<div class="note">この地域だけの情報は、まだ提供元から地域単位では公開されていないため、'+esc(PN[c])+'全体の情報を表示しています</div>';
  else if(ANAMES[c])h+='<div class="note">地図のエリアをタップすると絞り込めます ／ 薄い県をタップで移動</div>';
  GROUPS.forEach(function(gr){
-  h+='<div class="gh">'+gr[0]+'<span>'+gr[1]+'</span></div>';
-  gr[2].forEach(function(cat){var f=its.filter(function(i){return i.category===cat});
-   if(f.length)f.forEach(function(i){h+=card(i)});else h+=noneCard(cat)})});
+  var rows=[],worst=0,openIt=false;
+  gr[2].forEach(function(cat){
+   var f=its.filter(function(i){return i.category===cat});
+   if(f.length)f.forEach(function(i){rows.push(card(i));
+     if(i.status==="ok"){if(i.level==="alert"){worst=Math.max(worst,2)}else if(i.level==="watch"){worst=Math.max(worst,1)}}});
+   else rows.push(noneCard(cat))});
+  var bcls=worst===2?"alert":worst===1?"watch":"good";
+  var btxt=worst===2?"影響あり":worst===1?"一部影響":"確認";
+  h+='<details class="acc"'+(worst>0?" open":"")+'><summary><div class="t"><div>'
+   +'<div class="ttl">'+esc(gr[0])+'</div><div class="sub">'+esc(gr[1])+'</div></div>'
+   +'<div style="display:flex;align-items:center;gap:8px"><span class="badge '+bcls+'">'+btxt+'</span><span class="chev">▼</span></div>'
+   +'</div></summary><div class="body">'+rows.join("")+'</div></details>'});
  return h}
 function showPanel(html){var p=document.getElementById("panel");p.innerHTML=html;p.style.display="block";
  document.getElementById("wrap").className="wrap two";
@@ -190,7 +213,7 @@ function paint(){if(!path)return;
 var pb=document.getElementById("pbtns");
 Object.keys(PREFS).forEach(function(n){var b=document.createElement("button");
  b.textContent=n.replace("県","");b.onclick=function(){toPref(PREFS[n])};pb.appendChild(b)});
-fetch("data.json?"+Date.now()).then(function(r){return r.json()}).then(function(j){
+fetch("data.json?"+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){
  DATA=j;document.getElementById("upd").textContent="最終更新 "+fmt(j.generated_at);paint();
  if(cur)view==="area"?toArea(curArea):toPref(cur)}).catch(function(){
  document.getElementById("upd").textContent="データを取得できていません（各公式サイトをご確認ください）"});
