@@ -157,6 +157,47 @@ except Exception as e:
             source_name="JR九州",source_url=f"https://www.jrkyushu.co.jp/trains/info/{JRAREA[c]}.html",
             status="unavailable")
 
+# ---------- 通行実績マップ（トヨタ・ホンダ）----------
+# トヨタの「優先表示」に載っている災害エリアから対象県を判定し、該当県にだけ表示する。
+# （全国共通ページのため、判定せずに出すと無関係な地域の情報を見せてしまう）
+try:
+    ty = strip_tags(get("https://www.toyota.co.jp/jpn/auto/passable_route/map/", timeout=20))
+    seg = ty.split("優先表示")[1].split("北海道")[0] if "優先表示" in ty else ""
+    targets = {}
+    for ent in re.findall(r"([^\[\]\s]+?_\d{8,12})", seg):
+        for code, pname in PREFS.items():
+            if pname in ent or pname.replace("県","") in ent:
+                label = ent.split("_")[0]
+                dt = re.search(r"_(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})", ent)
+                if dt:
+                    label += f"（{int(dt.group(2))}/{int(dt.group(3))} {dt.group(4)}:{dt.group(5)}〜）"
+                targets.setdefault(code, label)
+    for c in PREFS:
+        if c in targets:
+            add(id=f"passable.{c}", category="passable", pref=c, level="good",
+                headline="実際に通れた道の地図が公開されています",
+                detail=f"対象エリア: {targets[c]} ／ 自動車メーカーが走行データをもとに直近24時間に通行実績のあった道を地図で公開しています",
+                note="通行実績があっても現在通行できるとは限りません。緊急交通路など規制されている場合があるため、現地の規制・誘導に従ってください。",
+                source_name="トヨタ 通れた道マップ",
+                source_url="https://www.toyota.co.jp/jpn/auto/passable_route/map/")
+            add(id=f"passable2.{c}", category="passable", pref=c, level="good",
+                headline="通行実績情報マップ（ホンダ）",
+                detail="インターナビ装着車の走行軌跡から作成された通行実績です",
+                source_name="ホンダ／ゼンリンデータコム",
+                source_url="https://disaster-map.its-mo.com/")
+        else:
+            add(id=f"passable.{c}", category="passable", pref=c, level="normal",
+                headline="この県を対象とした通行実績マップは公開されていません",
+                detail="大きな災害の際に、自動車メーカーが「実際に通れた道」の地図を対象地域向けに公開することがあります。")
+except Exception as e:
+    print("passable error:", e, file=sys.stderr)
+    for c in PREFS:
+        add(id=f"passable.{c}", category="passable", pref=c, level="unknown",
+            headline="通行実績マップの公開状況を取得できていません",
+            source_name="トヨタ 通れた道マップ",
+            source_url="https://www.toyota.co.jp/jpn/auto/passable_route/map/",
+            status="unavailable")
+
 # ---------- 停電（link_only）・道路の県別リンク ----------
 for c in PREFS:
     add(id=f"power.{c}",category="power",pref=c,
