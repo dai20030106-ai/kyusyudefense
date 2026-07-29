@@ -40,12 +40,13 @@ def wareki_to_iso(s):
                     tzinfo=JST).isoformat(timespec="seconds")
 
 # ---------- 防衛省（支援の種類ごとに場所を構造化） ----------
+# (キーワード, 表示名, カテゴリ, レベル, 同じ文に必要な語)
 SUPPORT_TYPES = [
-    ("給水", "給水支援", "water", "good"),
-    ("入浴", "入浴支援", "support", "good"),
-    ("避難所", "避難所としての開放", "support", "good"),
-    ("人命救助", "人命救助・捜索", "support", "alert"),
-    ("輸送", "物資・患者の輸送", "support", "good"),
+    ("給水", "給水支援", "water", "good", ["給水"]),
+    ("入浴", "入浴支援", "support", "good", ["入浴"]),
+    ("避難所", "駐屯地・基地の避難所開放", "support", "good", ["開放"]),
+    ("人命救助", "人命救助・捜索", "support", "alert", ["人命救助", "救助活動"]),
+    ("輸送", "物資・患者の輸送", "support", "good", ["輸送"]),
 ]
 PLACE = r"((?:[一-龥ァ-ヶA-Za-zＡ-Ｚ]{1,8})(?:駐屯地|基地|モール|病院|空港|体育館|小学校|中学校|高校|大学)[一-龥]{0,4})"
 CITY  = r"([一-龥]{1,6}(?:市|町|村))"
@@ -64,8 +65,8 @@ try:
             headline="自衛隊の活動状況（防衛大臣会見）",detail=d,
             note=("。".join([x for x in sents if "態勢" in x][:1])+"。") if any("態勢" in x for x in sents) else None,
             source_name="防衛省（大臣会見）",source_url=full,source_updated_at=iso)
-        for kw, label, cat, lvl in SUPPORT_TYPES:
-            hit = [x for x in sents if kw in x]
+        for kw, label, cat, lvl, need in SUPPORT_TYPES:
+            hit = [x for x in sents if kw in x and any(n in x for n in need)]
             if not hit: continue
             txt = "。".join(hit)
             spots = re.findall(CITY + r"[^。0-9]{0,4}([0-9]+)\s*か所", txt)
