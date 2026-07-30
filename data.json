@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-30T20:10:56+09:00",
+ "generated_at": "2026-07-30T22:07:33+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -50,7 +50,7 @@
    "note": "場所・住所・混雑状況は公式ページの一覧と地図で確認できます。",
    "source_name": "防災情報くまもと（熊本県）",
    "source_url": "https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
-   "source_updated_at": "2026-07-30T20:10:00+09:00",
+   "source_updated_at": "2026-07-30T21:19:00+09:00",
    "status": "ok"
   },
   {
