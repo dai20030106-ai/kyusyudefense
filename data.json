@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-30T17:33:44+09:00",
+ "generated_at": "2026-07-30T20:10:56+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -7,11 +7,11 @@
    "pref": null,
    "level": "alert",
    "headline": "自衛隊の活動状況（防衛大臣会見）",
-   "detail": "令和8年7月30日（木）10:34～10:35",
-   "note": null,
+   "detail": "令和8年7月30日（木）18:49～18:51",
+   "note": "給水支援について、自衛隊は昨日よりも態勢を強化しており、西部方面特科連隊第42即応機動連隊を中心とした給水部隊により、午前中からの更新として、益城町の1か所、大津町の3か所の計4か所が加わった24か所におきまして、約120名の隊員と水タンク車、水トレーラー計32両が給水支援を開始しております。",
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0730a_r.html",
-   "source_updated_at": "2026-07-30T10:34:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0730b_r.html",
+   "source_updated_at": "2026-07-30T18:49:00+09:00",
    "status": "ok"
   },
   {
@@ -20,11 +20,24 @@
    "pref": "43",
    "level": "good",
    "headline": "給水支援",
-   "detail": "松田病院 ／ 宇城市",
+   "detail": "益城町 1か所 ／ 大津町 3か所 ／ 松田病院 ／ 菊池郡市医師会立病院 ／ 菊池郡市",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0730a_r.html",
-   "source_updated_at": "2026-07-30T10:34:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0730b_r.html",
+   "source_updated_at": "2026-07-30T18:49:00+09:00",
+   "status": "ok"
+  },
+  {
+   "id": "support.入浴",
+   "category": "support",
+   "pref": "43",
+   "level": "good",
+   "headline": "入浴支援",
+   "detail": "呉基地 ／ 健軍駐屯地 ／ 佐世保基地 ／ 高市",
+   "note": null,
+   "source_name": "防衛省（大臣会見）",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0730b_r.html",
+   "source_updated_at": "2026-07-30T18:49:00+09:00",
    "status": "ok"
   },
   {
@@ -32,12 +45,12 @@
    "category": "shelter",
    "pref": "43",
    "level": "good",
-   "headline": "避難所 394か所が開設中",
-   "detail": "市町村別: 熊本市 179か所 ／ 八代市 62か所 ／ 天草市 48か所 ／ 水俣市 14か所 ／ 宇土市 9か所 ／ 人吉市 8か所 ／ 宇城市 7か所 ／ 合志市 7か所 ／ うち福祉避難所 15か所",
+   "headline": "避難所 389か所が開設中",
+   "detail": "市町村別: 熊本市 179か所 ／ 八代市 62か所 ／ 天草市 48か所 ／ 水俣市 14か所 ／ 宇土市 9か所 ／ 宇城市 7か所 ／ 合志市 7か所 ／ 御船町 6か所 ／ うち福祉避難所 15か所",
    "note": "場所・住所・混雑状況は公式ページの一覧と地図で確認できます。",
    "source_name": "防災情報くまもと（熊本県）",
    "source_url": "https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
-   "source_updated_at": "2026-07-30T15:03:00+09:00",
+   "source_updated_at": "2026-07-30T20:10:00+09:00",
    "status": "ok"
   },
   {
@@ -128,7 +141,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/fukhok.html",
-   "source_updated_at": "2026-07-30T15:00:00+09:00",
+   "source_updated_at": "2026-07-31T15:00:00+09:00",
    "status": "ok"
   },
   {
@@ -141,7 +154,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
-   "source_updated_at": "2026-07-30T15:00:00+09:00",
+   "source_updated_at": "2026-07-31T15:00:00+09:00",
    "status": "ok"
   },
   {
@@ -154,7 +167,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
-   "source_updated_at": "2026-07-30T15:00:00+09:00",
+   "source_updated_at": "2026-07-31T15:00:00+09:00",
    "status": "ok"
   },
   {
@@ -167,7 +180,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kuma.html",
-   "source_updated_at": "2026-07-30T15:00:00+09:00",
+   "source_updated_at": "2026-07-31T15:00:00+09:00",
    "status": "ok"
   },
   {
@@ -180,7 +193,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/oita.html",
-   "source_updated_at": "2026-07-30T15:00:00+09:00",
+   "source_updated_at": "2026-07-31T15:00:00+09:00",
    "status": "ok"
   },
   {
@@ -193,7 +206,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/miya.html",
-   "source_updated_at": "2026-07-30T15:00:00+09:00",
+   "source_updated_at": "2026-07-31T15:00:00+09:00",
    "status": "ok"
   },
   {
@@ -206,7 +219,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kago.html",
-   "source_updated_at": "2026-07-30T15:00:00+09:00",
+   "source_updated_at": "2026-07-31T15:00:00+09:00",
    "status": "ok"
   },
   {
