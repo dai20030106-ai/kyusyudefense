@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-31T07:37:20+09:00",
+ "generated_at": "2026-07-31T09:05:33+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -45,8 +45,8 @@
    "category": "shelter",
    "pref": "43",
    "level": "good",
-   "headline": "避難所 389か所が開設中",
-   "detail": "市町村別: 熊本市 179か所 ／ 八代市 62か所 ／ 天草市 48か所 ／ 水俣市 14か所 ／ 宇土市 9か所 ／ 宇城市 7か所 ／ 合志市 7か所 ／ 御船町 6か所 ／ うち福祉避難所 15か所",
+   "headline": "避難所 386か所が開設中",
+   "detail": "市町村別: 熊本市 179か所 ／ 八代市 62か所 ／ 天草市 48か所 ／ 水俣市 14か所 ／ 宇土市 9か所 ／ 宇城市 7か所 ／ 御船町 6か所 ／ 芦北町 6か所 ／ うち福祉避難所 15か所",
    "note": "場所・住所・混雑状況は公式ページの一覧と地図で確認できます。",
    "source_name": "防災情報くまもと（熊本県）",
    "source_url": "https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
@@ -141,7 +141,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/fukhok.html",
-   "source_updated_at": "2026-07-31T05:00:00+09:00",
+   "source_updated_at": "2026-07-31T08:15:00+09:00",
    "status": "ok"
   },
   {
@@ -154,7 +154,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
-   "source_updated_at": "2026-07-31T05:00:00+09:00",
+   "source_updated_at": "2026-07-31T08:15:00+09:00",
    "status": "ok"
   },
   {
@@ -167,7 +167,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
-   "source_updated_at": "2026-07-31T05:00:00+09:00",
+   "source_updated_at": "2026-07-31T08:15:00+09:00",
    "status": "ok"
   },
   {
@@ -180,7 +180,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kuma.html",
-   "source_updated_at": "2026-07-31T05:00:00+09:00",
+   "source_updated_at": "2026-07-31T08:15:00+09:00",
    "status": "ok"
   },
   {
@@ -193,7 +193,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/oita.html",
-   "source_updated_at": "2026-07-31T05:00:00+09:00",
+   "source_updated_at": "2026-07-31T08:15:00+09:00",
    "status": "ok"
   },
   {
@@ -206,7 +206,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/miya.html",
-   "source_updated_at": "2026-07-31T05:00:00+09:00",
+   "source_updated_at": "2026-07-31T08:15:00+09:00",
    "status": "ok"
   },
   {
@@ -219,7 +219,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kago.html",
-   "source_updated_at": "2026-07-31T05:00:00+09:00",
+   "source_updated_at": "2026-07-31T08:15:00+09:00",
    "status": "ok"
   },
   {
