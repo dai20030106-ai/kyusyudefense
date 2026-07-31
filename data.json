@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-07-31T19:07:15+09:00",
+ "generated_at": "2026-07-31T21:28:00+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -7,11 +7,11 @@
    "pref": null,
    "level": "alert",
    "headline": "自衛隊の活動状況（防衛大臣会見）",
-   "detail": "令和8年7月30日（木）18:49～18:51",
-   "note": "給水支援について、自衛隊は昨日よりも態勢を強化しており、西部方面特科連隊第42即応機動連隊を中心とした給水部隊により、午前中からの更新として、益城町の1か所、大津町の3か所の計4か所が加わった24か所におきまして、約120名の隊員と水タンク車、水トレーラー計32両が給水支援を開始しております。",
+   "detail": "令和8年7月31日（金）18:09～18:12",
+   "note": "﻿ (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-MWKV9D3'); 防衛省・自衛隊：防衛大臣臨時記者会見｜令和8年7月31日（金）18:09〜18:12 ホーム 報道・白書・広報イベント 記者会見 令和8年7月31日（金）18:09〜18:12 防衛大臣臨時記者会見 日時 令和8年7月31日（金）18:09〜18:12 場所 参議院別館3階防衛省政府控室 備考 令和8年熊本地震に係る小泉防衛大臣臨時会見 動画版 〇 発表事項 自衛隊は、昨日と同じく5,100名態勢で活動を行っています。",
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0730b_r.html",
-   "source_updated_at": "2026-07-30T18:49:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0731b_r.html",
+   "source_updated_at": "2026-07-31T18:09:00+09:00",
    "status": "ok"
   },
   {
@@ -20,11 +20,11 @@
    "pref": "43",
    "level": "good",
    "headline": "給水支援",
-   "detail": "益城町 1か所 ／ 大津町 3か所 ／ 松田病院 ／ 菊池郡市医師会立病院 ／ 菊池郡市",
+   "detail": "菊池郡市医師会立病院 ／ 熊本労災病院 ／ 菊池郡市",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0730b_r.html",
-   "source_updated_at": "2026-07-30T18:49:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0731b_r.html",
+   "source_updated_at": "2026-07-31T18:09:00+09:00",
    "status": "ok"
   },
   {
@@ -33,11 +33,24 @@
    "pref": "43",
    "level": "good",
    "headline": "入浴支援",
-   "detail": "呉基地 ／ 健軍駐屯地 ／ 佐世保基地 ／ 高市",
+   "detail": "熊本市",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0730b_r.html",
-   "source_updated_at": "2026-07-30T18:49:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0731b_r.html",
+   "source_updated_at": "2026-07-31T18:09:00+09:00",
+   "status": "ok"
+  },
+  {
+   "id": "support.輸送",
+   "category": "support",
+   "pref": "43",
+   "level": "good",
+   "headline": "物資・患者の輸送",
+   "detail": null,
+   "note": "「いせ」からは、陸上自衛隊のオスプレイ1機と海上自衛隊のヘリコプター3機により、陸上自衛隊高遊原分屯地などへの物資の輸送を実施しました。",
+   "source_name": "防衛省（大臣会見）",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0731b_r.html",
+   "source_updated_at": "2026-07-31T18:09:00+09:00",
    "status": "ok"
   },
   {
@@ -45,12 +58,12 @@
    "category": "shelter",
    "pref": "43",
    "level": "good",
-   "headline": "避難所 347か所が開設中",
-   "detail": "市町村別: 熊本市 179か所 ／ 八代市 61か所 ／ 天草市 30か所 ／ 宇土市 9か所 ／ 水俣市 7か所 ／ 宇城市 7か所 ／ 芦北町 6か所 ／ 山鹿市 5か所 ／ うち福祉避難所 15か所",
+   "headline": "避難所 281か所が開設中",
+   "detail": "市町村別: 熊本市 124か所 ／ 八代市 46か所 ／ 天草市 30か所 ／ 宇城市 11か所 ／ 宇土市 9か所 ／ 水俣市 7か所 ／ 芦北町 6か所 ／ 山鹿市 5か所 ／ うち福祉避難所 16か所",
    "note": "場所・住所・混雑状況は公式ページの一覧と地図で確認できます。",
    "source_name": "防災情報くまもと（熊本県）",
    "source_url": "https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
-   "source_updated_at": "2026-07-31T18:54:00+09:00",
+   "source_updated_at": "2026-07-31T20:53:00+09:00",
    "status": "ok"
   },
   {
