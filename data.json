@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-01T10:04:24+09:00",
+ "generated_at": "2026-08-01T13:54:22+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -58,12 +58,12 @@
    "category": "shelter",
    "pref": "43",
    "level": "good",
-   "headline": "避難所 225か所が開設中",
-   "detail": "市町村別: 熊本市 70か所 ／ 八代市 46か所 ／ 天草市 30か所 ／ 宇城市 11か所 ／ 宇土市 9か所 ／ 水俣市 7か所 ／ 芦北町 6か所 ／ 山鹿市 5か所 ／ うち福祉避難所 16か所",
+   "headline": "避難所 218か所が開設中",
+   "detail": "市町村別: 熊本市 63か所 ／ 八代市 46か所 ／ 天草市 30か所 ／ 宇城市 11か所 ／ 宇土市 9か所 ／ 水俣市 7か所 ／ 芦北町 6か所 ／ 山鹿市 5か所 ／ うち福祉避難所 16か所",
    "note": "場所・住所・混雑状況は公式ページの一覧と地図で確認できます。",
    "source_name": "防災情報くまもと（熊本県）",
    "source_url": "https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
-   "source_updated_at": "2026-07-31T20:01:00+09:00",
+   "source_updated_at": "2026-08-01T07:00:00+09:00",
    "status": "ok"
   },
   {
