@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-03T19:46:53+09:00",
+ "generated_at": "2026-08-03T22:43:32+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -7,11 +7,11 @@
    "pref": null,
    "level": "alert",
    "headline": "自衛隊の活動状況（防衛大臣会見）",
-   "detail": "令和8年8月1日（土）16:19～16:22",
-   "note": "﻿ (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-MWKV9D3'); 防衛省・自衛隊：防衛大臣臨時記者会見｜令和8年8月1日（土）16:19〜16:22 ホーム 報道・白書・広報イベント 記者会見 令和8年8月1日（土）16:19〜16:22 防衛大臣臨時記者会見 日時 令和8年8月1日（土）16:19〜16:22 場所 防衛省Ａ棟1階エントランス 備考 令和8年熊本地震に係る小泉防衛大臣臨時会見 動画版 〇 発表事項 自衛隊は、本日も5，100名態勢で活動を行っています。",
+   "detail": "令和8年8月3日（月）16:03～16:09",
+   "note": "﻿ (function (w, d, s, l, i) { w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' }); var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f); })(window, document, 'script', 'dataLayer', 'GTM-MWKV9D3'); 防衛省・自衛隊：防衛大臣臨時記者会見｜令和8年8月3日（月）16:03〜16:09 ホーム 報道・白書・広報イベント 記者会見 令和8年8月3日（月）16:03〜16:09 防衛大臣臨時記者会見 日時 令和8年8月3日（月）16:03〜16:09 場所 防衛省Ａ棟1階エントランス 備考 令和8年熊本地震に係る小泉防衛大臣臨時会見 動画版 〇 発表事項 自衛隊は、引き続き、5，100名態勢で活動を行っています。",
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0801a_r.html",
-   "source_updated_at": "2026-08-01T16:19:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0803a_r.html",
+   "source_updated_at": "2026-08-03T16:03:00+09:00",
    "status": "ok"
   },
   {
@@ -20,11 +20,11 @@
    "pref": "43",
    "level": "good",
    "headline": "給水支援",
-   "detail": "熊本労災病院",
+   "detail": "宇城市 3か所 ／ 宇土市 1か所 ／ 八代市 3か所 ／ 菊池市 1か所 ／ 松田病院 ／ 桜十字熊本宇城病院 ／ 熊本労災病院 ／ 菊池郡市医師会立病院 ／ 大手町・菊池郡市",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0801a_r.html",
-   "source_updated_at": "2026-08-01T16:19:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0803a_r.html",
+   "source_updated_at": "2026-08-03T16:03:00+09:00",
    "status": "ok"
   },
   {
@@ -33,11 +33,11 @@
    "pref": "43",
    "level": "good",
    "headline": "入浴支援",
-   "detail": "海上自衛隊呉基地所属隊員 ／ 海上自衛隊佐世保基地所属隊員 ／ 熊本市・宇城市",
+   "detail": "氷川町 4か所 ／ 氷川中学校 ／ 熊本市・宇城市・八代市・宇土市・宇都市",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0801a_r.html",
-   "source_updated_at": "2026-08-01T16:19:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0803a_r.html",
+   "source_updated_at": "2026-08-03T16:03:00+09:00",
    "status": "ok"
   },
   {
@@ -46,11 +46,11 @@
    "pref": "43",
    "level": "good",
    "headline": "物資・患者の輸送",
-   "detail": "航空自衛隊小牧基地 ／ 千歳基地 ／ 三沢基地 ／ 入間基地",
+   "detail": "小牧基地",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0801a_r.html",
-   "source_updated_at": "2026-08-01T16:19:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0803a_r.html",
+   "source_updated_at": "2026-08-03T16:03:00+09:00",
    "status": "ok"
   },
   {
@@ -58,8 +58,8 @@
    "category": "shelter",
    "pref": "43",
    "level": "good",
-   "headline": "避難所 154か所が開設中",
-   "detail": "市町村別: 熊本市 52か所 ／ 八代市 44か所 ／ 宇城市 11か所 ／ 宇土市 8か所 ／ 芦北町 6か所 ／ 御船町 5か所 ／ 甲佐町 5か所 ／ 上天草市 4か所 ／ うち福祉避難所 5か所",
+   "headline": "避難所 150か所が開設中",
+   "detail": "市町村別: 熊本市 52か所 ／ 八代市 44か所 ／ 宇城市 11か所 ／ 宇土市 8か所 ／ 芦北町 6か所 ／ 甲佐町 5か所 ／ 上天草市 4か所 ／ 美里町 4か所 ／ うち福祉避難所 5か所",
    "note": "場所・住所・混雑状況は公式ページの一覧と地図で確認できます。",
    "source_name": "防災情報くまもと（熊本県）",
    "source_url": "https://portal.bousai.pref.kumamoto.jp/sp.html?p=evacuation%2Fshelter",
