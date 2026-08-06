@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-06T09:52:23+09:00",
+ "generated_at": "2026-08-06T13:15:58+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -7,37 +7,24 @@
    "pref": null,
    "level": "alert",
    "headline": "自衛隊の活動状況（防衛大臣会見）",
-   "detail": "令和8年8月5日（水）16:53～16:55",
-   "note": "防衛省・自衛隊は、本日も約5，100名態勢で、生活支援を継続しています。",
-   "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0805a_r.html",
-   "source_updated_at": "2026-08-05T16:53:00+09:00",
-   "status": "ok"
-  },
-  {
-   "id": "support.給水",
-   "category": "water",
-   "pref": "43",
-   "level": "good",
-   "headline": "給水支援",
-   "detail": "市町 37か所 ／ 八代市",
+   "detail": "令和8年8月6日（木）11:38～11:39",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0805a_r.html",
-   "source_updated_at": "2026-08-05T16:53:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0806a_r.html",
+   "source_updated_at": "2026-08-06T11:38:00+09:00",
    "status": "ok"
   },
   {
-   "id": "support.入浴",
+   "id": "support.輸送",
    "category": "support",
    "pref": "43",
    "level": "good",
-   "headline": "入浴支援",
-   "detail": "市町 7か所 ／ 宇城市",
-   "note": null,
+   "headline": "物資・患者の輸送",
+   "detail": null,
+   "note": "具体的な作業としては、ブルーシートを隙間なく展開する能力を有する県指定の専門業者が屋根などの高所での展開作業を行い、自衛隊はブルーシートの輸送、高所への受け渡し、周囲の安全確保など、地上での補助作業を基本的に行うこととなります。",
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0805a_r.html",
-   "source_updated_at": "2026-08-05T16:53:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0806a_r.html",
+   "source_updated_at": "2026-08-06T11:38:00+09:00",
    "status": "ok"
   },
   {
