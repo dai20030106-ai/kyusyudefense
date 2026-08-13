@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-14T05:04:58+09:00",
+ "generated_at": "2026-08-14T06:22:46+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -130,19 +130,6 @@
    "source_url": "https://www.bousai.go.jp/link/index.html",
    "source_updated_at": null,
    "status": "link_only"
-  },
-  {
-   "id": "road.emc",
-   "category": "road",
-   "pref": null,
-   "level": "good",
-   "headline": "通行止めは解除されました",
-   "detail": null,
-   "note": "解除済み: E3九州自動車道 松橋IC〜えびのIC",
-   "source_name": "NEXCO西日本",
-   "source_url": "https://www.w-nexco.co.jp/emc/20260813195404.html",
-   "source_updated_at": null,
-   "status": "ok"
   },
   {
    "id": "rail.40",
