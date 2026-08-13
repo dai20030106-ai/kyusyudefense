@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-13T19:11:43+09:00",
+ "generated_at": "2026-08-13T20:22:02+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -140,7 +140,7 @@
    "detail": null,
    "note": "解除済み: E3九州自動車道 松橋IC〜えびのIC",
    "source_name": "NEXCO西日本",
-   "source_url": "https://www.w-nexco.co.jp/emc/20260813150333.html",
+   "source_url": "https://www.w-nexco.co.jp/emc/20260813195404.html",
    "source_updated_at": null,
    "status": "ok"
   },
