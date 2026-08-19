@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-19T23:37:36+09:00",
+ "generated_at": "2026-08-20T00:34:56+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -135,92 +135,92 @@
    "id": "rail.40",
    "category": "rail",
    "pref": "40",
-   "level": "alert",
-   "headline": "一部線区で運休が発生しています（JR九州発表）",
-   "detail": "運転見合わせ中の線区（九州全体）: 肥薩線 八代〜吉松間",
+   "level": "unknown",
+   "headline": "最新の運行情報を取得できていません",
+   "detail": null,
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/fukhok.html",
    "source_updated_at": "2026-08-17T00:00:00+09:00",
-   "status": "ok"
+   "status": "stale"
   },
   {
    "id": "rail.41",
    "category": "rail",
    "pref": "41",
-   "level": "alert",
-   "headline": "一部線区で運休が発生しています（JR九州発表）",
-   "detail": "運転見合わせ中の線区（九州全体）: 肥薩線 八代〜吉松間",
+   "level": "unknown",
+   "headline": "最新の運行情報を取得できていません",
+   "detail": null,
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
    "source_updated_at": "2026-08-17T00:00:00+09:00",
-   "status": "ok"
+   "status": "stale"
   },
   {
    "id": "rail.42",
    "category": "rail",
    "pref": "42",
-   "level": "alert",
-   "headline": "一部線区で運休が発生しています（JR九州発表）",
-   "detail": "運転見合わせ中の線区（九州全体）: 肥薩線 八代〜吉松間",
+   "level": "unknown",
+   "headline": "最新の運行情報を取得できていません",
+   "detail": null,
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
    "source_updated_at": "2026-08-17T00:00:00+09:00",
-   "status": "ok"
+   "status": "stale"
   },
   {
    "id": "rail.43",
    "category": "rail",
    "pref": "43",
-   "level": "alert",
-   "headline": "一部線区で運休が発生しています（JR九州発表）",
-   "detail": "運転見合わせ中の線区（九州全体）: 肥薩線 八代〜吉松間",
+   "level": "unknown",
+   "headline": "最新の運行情報を取得できていません",
+   "detail": null,
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kuma.html",
    "source_updated_at": "2026-08-17T00:00:00+09:00",
-   "status": "ok"
+   "status": "stale"
   },
   {
    "id": "rail.44",
    "category": "rail",
    "pref": "44",
-   "level": "alert",
-   "headline": "一部線区で運休が発生しています（JR九州発表）",
-   "detail": "運転見合わせ中の線区（九州全体）: 肥薩線 八代〜吉松間",
+   "level": "unknown",
+   "headline": "最新の運行情報を取得できていません",
+   "detail": null,
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/oita.html",
    "source_updated_at": "2026-08-17T00:00:00+09:00",
-   "status": "ok"
+   "status": "stale"
   },
   {
    "id": "rail.45",
    "category": "rail",
    "pref": "45",
-   "level": "alert",
-   "headline": "一部線区で運休が発生しています（JR九州発表）",
-   "detail": "運転見合わせ中の線区（九州全体）: 肥薩線 八代〜吉松間",
+   "level": "unknown",
+   "headline": "最新の運行情報を取得できていません",
+   "detail": null,
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/miya.html",
    "source_updated_at": "2026-08-17T00:00:00+09:00",
-   "status": "ok"
+   "status": "stale"
   },
   {
    "id": "rail.46",
    "category": "rail",
    "pref": "46",
-   "level": "alert",
-   "headline": "一部線区で運休が発生しています（JR九州発表）",
-   "detail": "運転見合わせ中の線区（九州全体）: 肥薩線 八代〜吉松間",
+   "level": "unknown",
+   "headline": "最新の運行情報を取得できていません",
+   "detail": null,
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kago.html",
    "source_updated_at": "2026-08-17T00:00:00+09:00",
-   "status": "ok"
+   "status": "stale"
   },
   {
    "id": "passable.40",
