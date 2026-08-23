@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-23T21:47:30+09:00",
+ "generated_at": "2026-08-23T22:34:36+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -7,11 +7,11 @@
    "pref": null,
    "level": "alert",
    "headline": "自衛隊の活動状況（防衛大臣会見）",
-   "detail": "令和8年8月7日（金）15:43～15:46",
-   "note": "防衛省・自衛隊は、本日も約5，100名態勢で、生活支援を継続しています。",
+   "detail": "令和8年8月23日（日）18:40～18:50",
+   "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0807a_r.html",
-   "source_updated_at": "2026-08-07T15:43:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
+   "source_updated_at": "2026-08-23T18:40:00+09:00",
    "status": "ok"
   },
   {
@@ -20,11 +20,11 @@
    "pref": "43",
    "level": "good",
    "headline": "給水支援",
-   "detail": "八代市・市町",
+   "detail": "イオンモール熊本",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0807a_r.html",
-   "source_updated_at": "2026-08-07T15:43:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
+   "source_updated_at": "2026-08-23T18:40:00+09:00",
    "status": "ok"
   },
   {
@@ -33,11 +33,37 @@
    "pref": "43",
    "level": "good",
    "headline": "入浴支援",
-   "detail": "市町 2か所 ／ 熊本市 1か所 ／ 宇城市・宇土市",
+   "detail": "氷川中学校 ／ イオンモール熊本 ／ 熊本市・宇城市・宇土市・氷川町",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0807a_r.html",
-   "source_updated_at": "2026-08-07T15:43:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
+   "source_updated_at": "2026-08-23T18:40:00+09:00",
+   "status": "ok"
+  },
+  {
+   "id": "support.人命救助",
+   "category": "support",
+   "pref": "43",
+   "level": "alert",
+   "headline": "人命救助・捜索",
+   "detail": "イオンモール熊本",
+   "note": null,
+   "source_name": "防衛省（大臣会見）",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
+   "source_updated_at": "2026-08-23T18:40:00+09:00",
+   "status": "ok"
+  },
+  {
+   "id": "support.輸送",
+   "category": "support",
+   "pref": "43",
+   "level": "good",
+   "headline": "物資・患者の輸送",
+   "detail": "イオンモール熊本",
+   "note": null,
+   "source_name": "防衛省（大臣会見）",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
+   "source_updated_at": "2026-08-23T18:40:00+09:00",
    "status": "ok"
   },
   {
