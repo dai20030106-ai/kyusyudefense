@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-08-27T05:39:16+09:00",
+ "generated_at": "2026-08-27T09:33:58+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -291,25 +291,12 @@
    "id": "passable.43",
    "category": "passable",
    "pref": "43",
-   "level": "good",
-   "headline": "実際に通れた道の地図が公開されています",
-   "detail": "対象エリア: 熊本県宇城市震度7（7/28 16:30〜） ／ 自動車メーカーが走行データをもとに直近24時間に通行実績のあった道を地図で公開しています",
-   "note": "通行実績があっても現在通行できるとは限りません。緊急交通路など規制されている場合があるため、現地の規制・誘導に従ってください。",
-   "source_name": "トヨタ 通れた道マップ",
-   "source_url": "https://www.toyota.co.jp/jpn/auto/passable_route/map/",
-   "source_updated_at": null,
-   "status": "ok"
-  },
-  {
-   "id": "passable2.43",
-   "category": "passable",
-   "pref": "43",
-   "level": "good",
-   "headline": "通行実績情報マップ（ホンダ）",
-   "detail": "インターナビ装着車の走行軌跡から作成された通行実績です",
+   "level": "normal",
+   "headline": "この県を対象とした通行実績マップは公開されていません",
+   "detail": "大きな災害の際に、自動車メーカーが「実際に通れた道」の地図を対象地域向けに公開することがあります。",
    "note": null,
-   "source_name": "ホンダ／ゼンリンデータコム",
-   "source_url": "https://disaster-map.its-mo.com/",
+   "source_name": null,
+   "source_url": null,
    "source_updated_at": null,
    "status": "ok"
   },
