@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-04T14:06:33+09:00",
+ "generated_at": "2026-10-04T20:13:42+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -7,63 +7,11 @@
    "pref": null,
    "level": "alert",
    "headline": "自衛隊の活動状況（防衛大臣会見）",
-   "detail": "令和8年8月23日（日）18:40～18:50",
+   "detail": "令和8年10月4日（日）12:25～12:30",
    "note": null,
    "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
-   "source_updated_at": "2026-08-23T18:40:00+09:00",
-   "status": "ok"
-  },
-  {
-   "id": "support.給水",
-   "category": "water",
-   "pref": "43",
-   "level": "good",
-   "headline": "給水支援",
-   "detail": "イオンモール熊本",
-   "note": null,
-   "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
-   "source_updated_at": "2026-08-23T18:40:00+09:00",
-   "status": "ok"
-  },
-  {
-   "id": "support.入浴",
-   "category": "support",
-   "pref": "43",
-   "level": "good",
-   "headline": "入浴支援",
-   "detail": "氷川中学校 ／ イオンモール熊本 ／ 熊本市・宇城市・宇土市・氷川町",
-   "note": null,
-   "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
-   "source_updated_at": "2026-08-23T18:40:00+09:00",
-   "status": "ok"
-  },
-  {
-   "id": "support.人命救助",
-   "category": "support",
-   "pref": "43",
-   "level": "alert",
-   "headline": "人命救助・捜索",
-   "detail": "イオンモール熊本",
-   "note": null,
-   "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
-   "source_updated_at": "2026-08-23T18:40:00+09:00",
-   "status": "ok"
-  },
-  {
-   "id": "support.輸送",
-   "category": "support",
-   "pref": "43",
-   "level": "good",
-   "headline": "物資・患者の輸送",
-   "detail": "イオンモール熊本",
-   "note": null,
-   "source_name": "防衛省（大臣会見）",
-   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/0823a_r.html",
-   "source_updated_at": "2026-08-23T18:40:00+09:00",
+   "source_url": "https://www.mod.go.jp/j/press/kisha/2026/1004a_r.html",
+   "source_updated_at": "2026-10-04T12:25:00+09:00",
    "status": "ok"
   },
   {
