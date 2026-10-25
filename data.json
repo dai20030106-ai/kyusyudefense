@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-25T23:30:23+09:00",
+ "generated_at": "2026-10-26T03:15:07+09:00",
  "items": [
   {
    "id": "gov.mod",
@@ -115,7 +115,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/fukhok.html",
-   "source_updated_at": "2026-10-25T00:00:00+09:00",
+   "source_updated_at": "2026-10-26T00:00:00+09:00",
    "status": "ok"
   },
   {
@@ -128,7 +128,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
-   "source_updated_at": "2026-10-25T00:00:00+09:00",
+   "source_updated_at": "2026-10-26T00:00:00+09:00",
    "status": "ok"
   },
   {
@@ -141,7 +141,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/sagnag.html",
-   "source_updated_at": "2026-10-25T00:00:00+09:00",
+   "source_updated_at": "2026-10-26T00:00:00+09:00",
    "status": "ok"
   },
   {
@@ -154,7 +154,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kuma.html",
-   "source_updated_at": "2026-10-25T00:00:00+09:00",
+   "source_updated_at": "2026-10-26T00:00:00+09:00",
    "status": "ok"
   },
   {
@@ -167,7 +167,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/oita.html",
-   "source_updated_at": "2026-10-25T00:00:00+09:00",
+   "source_updated_at": "2026-10-26T00:00:00+09:00",
    "status": "ok"
   },
   {
@@ -180,7 +180,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/miya.html",
-   "source_updated_at": "2026-10-25T00:00:00+09:00",
+   "source_updated_at": "2026-10-26T00:00:00+09:00",
    "status": "ok"
   },
   {
@@ -193,7 +193,7 @@
    "note": null,
    "source_name": "JR九州",
    "source_url": "https://www.jrkyushu.co.jp/trains/info/kago.html",
-   "source_updated_at": "2026-10-25T00:00:00+09:00",
+   "source_updated_at": "2026-10-26T00:00:00+09:00",
    "status": "ok"
   },
   {
